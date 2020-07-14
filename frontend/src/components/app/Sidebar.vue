@@ -1,0 +1,25 @@
+<template>
+    <ul class="sidenav app-sidenav" :class="{open: value}">
+        <img src="../../../public/logo.png" width="100%" height="10%" style="padding: 3px"/>
+        <router-link v-for="link in links" :key="link.url" tag="li" active-class="active" :to="link.url" >
+            <a href="#" class="waves-effect waves-orange pointer">{{link.title}}</a>
+        </router-link>
+    </ul>
+</template>
+
+<script>
+    export default {
+        name: "Sidebar",
+        props: ['value'],
+        data: () => ({
+                links: [
+                    {title: 'Вакансии', url: '/vacancies'},
+                    {title: 'Сотрудники', url: '/staff'}
+                ]
+            })
+    }
+</script>
+
+<style scoped>
+
+</style>
