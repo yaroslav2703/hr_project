@@ -10,8 +10,7 @@ app.use(bodyParser.json());
 
 
 const routes = express.Router();
-//require('./auth')(routes);
-//require('./users')(routes);
+require('./vacancies')(routes);
 app.use('/api', routes);
 
 const frontendDir = path.join(
@@ -28,6 +27,5 @@ if (fs.existsSync(frontendDir)){
         );
     });
 }
-
 
 module.exports = app;

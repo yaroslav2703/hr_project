@@ -20,6 +20,12 @@ const router = new Router({
                   component: () => import('./views/Vacancies.vue')
             },
             {
+                  path: '/vacancies/add',
+                  name: 'vacancies-add',
+                  meta: {layout: 'main'},
+                  component: () => import('./views/AddVacancies.vue')
+            },
+            {
                   path: '/staff',
                   name: 'staff',
                   meta: {layout: 'main'},
