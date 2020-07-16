@@ -8,8 +8,12 @@ const VacancySchemaResponce = new Schema(
         skill: { type: String, required: true },
         badExperience: { type: String, required: true },
         psychChar: { type: String, required: true },
+<<<<<<< HEAD
     },
     { timestamps: true },
+=======
+    }
+>>>>>>> origin/master
 )
 
 module.exports = database.model('VacancyResponce', VacancySchemaResponce);
