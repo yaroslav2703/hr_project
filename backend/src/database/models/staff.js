@@ -18,12 +18,8 @@ const StaffSchema = new Schema(
         subordination: { type: String, required: true },
         hireDate: { type: Date, required: true },
         probation: { type: String, required: true }
-<<<<<<< HEAD
     },
     { timestamps: true },
-=======
-    }
->>>>>>> origin/master
 )
 
 module.exports = database.model('Staff', StaffSchema);
