@@ -10,7 +10,9 @@ app.use(bodyParser.json());
 
 
 const routes = express.Router();
+require('./auth')(routes);
 require('./vacancies')(routes);
+//require('./staff')(routes);
 app.use('/api', routes);
 
 const frontendDir = path.join(

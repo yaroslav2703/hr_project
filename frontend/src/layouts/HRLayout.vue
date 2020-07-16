@@ -10,9 +10,9 @@
 </template>
 
 <script>
-    import Sidebar from "@/components/app/Sidebar";
+    import Sidebar from "@/components/app/hr/Sidebar";
     export default {
-        name: "MainLayout",
+        name: "HRLayout",
         data:() => ({
             isOpen: true
         }),

@@ -158,7 +158,8 @@
 </template>
 
 <script>
-    import requests from "../utils/requests";
+    import messages from "@/utils/messages";
+    import requests from "@/utils/requests";
 
     export default {
         name: "AddVacancies",
@@ -179,6 +180,11 @@
             wageAdditional: '',
             workingConditions: ''
         }),
+        mounted() {
+            if (messages[this.$route.query.message]) {
+                this.$message(messages[this.$route.query.message])
+            }
+        },
         methods: {
             async submitHandler() {
                 const formData = {
@@ -199,10 +205,10 @@
                     workingConditions: this.workingConditions
                 };
                 try {
-                    const responce = await requests.request('http://localhost:5000/api/vacancy/add', 'POST', formData);
-                    this.$message(responce.message);
-                    if (responce.message === 'Вакансия добавлена') {
-                        await this.$router.push('vacancies')
+                    const response = await requests.request('/api/vacancy/add', 'POST', formData);
+                    this.$message(response.message);
+                    if (response.message === 'Вакансия добавлена') {
+                        await this.$router.push('/hr/vacancies')
                     }
                 } catch (e) {
                     console.log(e.message)

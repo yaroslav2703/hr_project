@@ -10,23 +10,11 @@ const UserSchema = new Schema(
         password: { type: String, maxlength: 255, required: true },
         disabled: { type: Boolean, default: false },
         role: { type: String, required: true },
-        loans: [{ type: Schema.Types.ObjectID, ref: 'Loans' }],
         createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
         updatedBy: { type: Schema.Types.ObjectId, ref: 'User' }
     },
     { timestamps: true },
 );
 
-UserSchema.virtual('id').get(function () {
-    return this._id.toHexString();
-});
-
-UserSchema.set('toJSON', {
-    getters: true,
-});
-
-UserSchema.set('toObject', {
-    getters: true,
-});
 
 module.exports = database.model('User', UserSchema);

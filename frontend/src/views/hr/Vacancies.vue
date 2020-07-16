@@ -5,7 +5,7 @@
             <div class="col s3 m3 l3">
                 <div class="card blue-grey lighten-5" style="min-height: 155px">
                     <div class="card-content white-text center-align" style="padding: 50px 0px 0px 0px">
-                        <router-link to="/vacancies/add" class="white-text" >
+                        <router-link to="/hr/vacancies/add" class="white-text" >
                             <button class="btn-floating btn-large waves-effect waves-light orange darken-2">
                                 <i class="material-icons">add</i>
                             </button>
@@ -21,11 +21,12 @@
 </template>
 
 <script>
-    import Card from "@/components/app/vacancies/Card";
+    import Card from "@/components/app/hr/vacancies/Card";
+    import messages from "@/utils/messages";
     import requests from "@/utils/requests";
 
     export default {
-        name: "Staff",
+        name: "Vacancies",
         data: () => ({
             vacancies: null
         }),
@@ -33,8 +34,12 @@
             Card
         },
         async created() {
-            const response = await requests.request('http://localhost:5000/api/vacancy/get');
+            if (messages[this.$route.query.message]) {
+                this.$message(messages[this.$route.query.message])
+            }
+            const response = await requests.request('/api/vacancy/get');
             this.vacancies = response.vacancies;
+            this.$message(response.message);
         },
 
 

@@ -7,17 +7,19 @@
 </template>
 
 <script>
-  import MainLayout from "./layouts/MainLayout";
+  import EmptyLayout from '@/layouts/EmptyLayout';
+  import HRLayout from "@/layouts/HRLayout";
+  import MemberLayout from "@/layouts/MemberLayout";
 
 export default {
   name: 'App',
   computed: {
     layout() {
-      return 'main-layout'
+      return (this.$route.meta.layout || 'empty') + '-layout'
     }
   },
   components: {
-    MainLayout
+    EmptyLayout, HRLayout, MemberLayout
   }
 }
 </script>
