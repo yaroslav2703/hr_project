@@ -39,6 +39,12 @@ const router = new Router({
                   component: () => import('./views/member/Vacancies.vue')
             },
             {
+                  path: '/hr/vacancies/edit/:id',
+                  name: 'hr-vacancies-edit',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/EditVacancies.vue')
+            },
+            {
                   path: '/hr/vacancies/add',
                   name: 'hr-vacancies-add',
                   meta: {layout: 'hr', auth: true, role: 'hr'},
@@ -46,13 +52,25 @@ const router = new Router({
             },
             {
                   path: '/hr/vacancies',
-                  name: 'l-books',
+                  name: 'hr-vacancies',
                   meta: {layout: 'hr', auth: true, role: 'hr'},
                   component: () => import('./views/hr/Vacancies.vue')
             },
             {
+                  path: '/hr/vacancies/view/:id',
+                  name: 'hr-vacancies-view',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/ViewVacancies.vue')
+            },
+            {
+                  path: '/hr/staff/add',
+                  name: 'hr-staff-add',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/AddStaff.vue')
+            },
+            {
                   path: '/hr/staff',
-                  name: 'l-loans',
+                  name: 'hr-staff',
                   meta: {layout: 'hr', auth: true, role: 'hr'},
                   component: () => import('./views/hr/Staff.vue')
             }

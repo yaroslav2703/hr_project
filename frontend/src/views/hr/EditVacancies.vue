@@ -12,7 +12,7 @@
                                     id="title"
                                     type="text"
                                     v-model.trim="title"
-                                   >
+                            >
                             <label for="title">Название</label>
                         </div>
                         <div class="input-field ">
@@ -141,7 +141,7 @@
                 <div class="row">
                     <div class="col s4 m4 l4 offset-s4 offset-m4 offset-l4">
                         <button class="btn waves-effect waves-light blue-grey darken-5" type="submit">
-                            Опубликовать
+                            Изменить
                             <i class="material-icons right">save</i>
                         </button>
                     </div>
@@ -164,6 +164,7 @@
     export default {
         name: "AddVacancies",
         data : () => ({
+            vacancy: null,
             title: '',
             type: '',
             company: '',
@@ -185,9 +186,39 @@
                 this.$message(messages[this.$route.query.message])
             }
         },
+        async created() {
+            const formData = {
+                _id: this.$route.params.id
+            };
+            try {
+                const responce = await requests.request('/api/vacancy/get-one', 'POST', formData);
+                this.$message(responce.message);
+                if (responce.message === 'Вакансия выбрана') {
+                    this.vacancy = responce.vacancy;
+                    this.title = this.vacancy.title;
+                    this.type= this.vacancy.type;
+                    this.company = this.vacancy.company;
+                    this.department = this.vacancy.department;
+                    this.searchReason = this.vacancy.searchReason;
+                    this.subordination = this.vacancy.subordination;
+                    this.responsibility = this.vacancy.responsibility;
+                    this.exitToWork = this.vacancy.exitToWork;
+                    this.highEducation = this.vacancy.highEducation;
+                    this.requiredSkill = this.vacancy.requiredSkill;
+                    this.wageProbation = this.vacancy.wageProbation;
+                    this.wage = this.vacancy.wage;
+                    this.wageKPI = this.vacancy.wageKPI;
+                    this.wageAdditional = this.vacancy.wageAdditional;
+                    this.workingConditions = this.vacancy.workingConditions;
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        },
         methods: {
             async submitHandler() {
                 const formData = {
+                    _id: this.vacancy._id,
                     title: this.title,
                     type: this.type,
                     company: this.company,
@@ -206,16 +237,16 @@
                 };
 
                 for (let key in formData) {
-                    if (formData[key] == '') {
+                    if (formData[key] === '') {
                         formData[key] = 'Не указано'
                     }
                 }
 
                 try {
-                    const response = await requests.request('/api/vacancy/add', 'POST', formData);
+                    const response = await requests.request('/api/vacancy/update', 'PUT', formData);
                     this.$message(response.message);
-                    if (response.message === 'Вакансия добавлена') {
-                        await this.$router.push('/hr/vacancies')
+                    if (response.message === 'Вакансия обновлена!') {
+                        await this.$router.push('/login?message=vacancies')
                     }
                 } catch (e) {
                     console.log(e.message)

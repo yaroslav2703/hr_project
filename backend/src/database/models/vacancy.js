@@ -10,7 +10,7 @@ const VacancySchema = new Schema(
         subordination: { type: String, required: false },
         company: { type: String, required: false },
         responsibility: { type: String, required: false },
-       // exitToWork: { type: Date, required: false },
+        exitToWork: { type: String, required: false },
         //sex: { type: String, required: true },
         //age: { type: String, required: true },
         highEducation: { type: String, required: true, enum: ['Обязательное', 'Желательное', 'Не важно']},

@@ -1,7 +1,17 @@
 <template>
     <div>
+        <div class="page-title">
+            <h3>Сотрудники</h3>
+        </div>
+        <div>
+            <router-link :to="{ name: 'hr-staff-add'}" class="white-text">
+                <button class="btn waves-effect waves-light orange darken-2" type="button">
+                    Добавить
+                    <i class="material-icons right">add</i>
+                </button>
+            </router-link>
+        </div>
         <ul class="collection with-header">
-
             <li class="collection-header">
                 <div style="margin-left: 10px" class="row center-align">
                     <div class="col s4 m4 l4">
@@ -47,7 +57,6 @@
             }
             const response = await requests.request('/api/staff/get');
             this.employees = response.employees;
-            this.$message(response.message);
         }
 
 

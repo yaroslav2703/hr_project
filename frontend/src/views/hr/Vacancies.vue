@@ -39,7 +39,6 @@
             }
             const response = await requests.request('/api/vacancy/get');
             this.vacancies = response.vacancies;
-            this.$message(response.message);
         },
 
 

@@ -9,27 +9,99 @@
                     <div class="col s4 m4 l4">
                         <div class="input-field ">
                             <input
-                                    id="title"
+                                    id="photo"
                                     type="text"
-                                    v-model.trim="title"
+                                    v-model.trim="photo"
                                    >
-                            <label for="title">Название</label>
+                            <label for="photo">Путь к фотографии</label>
                         </div>
                         <div class="input-field ">
                             <input
-                                    id="type"
+                                    id="fullNameRus"
                                     type="text"
-                                    v-model.trim="type"
+                                    v-model.trim="fullNameRus"
                             >
-                            <label for="type">Тип</label>
+                            <label for="fullNameRus">ФИО (Рус)</label>
                         </div>
                         <div class="input-field ">
                             <input
-                                    id="company"
+                                    id="fullNameEng"
                                     type="text"
-                                    v-model.trim="company"
+                                    v-model.trim="fullNameEng"
                             >
-                            <label for="company">Компания</label>
+                            <label for="fullNameEng">ФИО (Англ)</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="birthDate"
+                                    type="text"
+                                    v-model.trim="birthDate"
+                            >
+                            <label for="birthDate">Дата рождения</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="address"
+                                    type="text"
+                                    v-model.trim="address"
+                            >
+                            <label for="address">Адрес</label>
+                        </div>
+
+                    </div>
+                    <div class="col s4 m4 l4">
+
+                        <div class="input-field ">
+                            <input
+                                    id="position"
+                                    type="text"
+                                    v-model.trim="position"
+                            >
+                            <label for="position">Должность</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="familyContacts"
+                                    type="text"
+                                    v-model.trim="familyContacts"
+                            >
+                            <label for="familyContacts">Контакты родственников</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="extTelephone"
+                                    type="text"
+                                    v-model.trim="extTelephone"
+                            >
+                            <label for="extTelephone">Внутренний телефон</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="telephone"
+                                    type="text"
+                                    v-model.trim="telephone"
+                            >
+                            <label for="telephone">Телефон</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="email"
+                                    type="text"
+                                    v-model.trim="email"
+                            >
+                            <label for="email">Электронная почта</label>
+                        </div>
+
+                    </div>
+                    <div class="col s4 m4 l4">
+
+                        <div class="input-field ">
+                            <input
+                                    id="skype"
+                                    type="text"
+                                    v-model.trim="skype"
+                            >
+                            <label for="skype">Скайп</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -41,18 +113,6 @@
                         </div>
                         <div class="input-field ">
                             <input
-                                    id="searchReason"
-                                    type="text"
-                                    v-model.trim="searchReason"
-                            >
-                            <label for="searchReason">Причина поиска</label>
-                        </div>
-
-                    </div>
-                    <div class="col s4 m4 l4">
-
-                        <div class="input-field ">
-                            <input
                                     id="subordination"
                                     type="text"
                                     v-model.trim="subordination"
@@ -61,79 +121,19 @@
                         </div>
                         <div class="input-field ">
                             <input
-                                    id="responsibility"
+                                    id="hireDate"
                                     type="text"
-                                    v-model.trim="responsibility"
+                                    v-model.trim="hireDate"
                             >
-                            <label for="responsibility">Обязанности</label>
+                            <label for="hireDate">Дата приёма на работу</label>
                         </div>
                         <div class="input-field ">
                             <input
-                                    id="exitToWork"
+                                    id="probation"
                                     type="text"
-                                    v-model.trim="exitToWork"
+                                    v-model.trim="probation"
                             >
-                            <label for="exitToWork">Выход на работу</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="highEducation"
-                                    type="text"
-                                    v-model.trim="highEducation"
-                            >
-                            <label for="highEducation">Высшее образование</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="requiredSkill"
-                                    type="text"
-                                    v-model.trim="requiredSkill"
-                            >
-                            <label for="requiredSkill">Необходимые навыки работы</label>
-                        </div>
-
-                    </div>
-                    <div class="col s4 m4 l4">
-
-                        <div class="input-field ">
-                            <input
-                                    id="wageProbation"
-                                    type="text"
-                                    v-model.trim="wageProbation"
-                            >
-                            <label for="wageProbation">ЗП на время испытательного срока</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="wage"
-                                    type="text"
-                                    v-model.trim="wage"
-                            >
-                            <label for="wage">Зарплата</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="wageKPI"
-                                    type="text"
-                                    v-model.trim="wageKPI"
-                            >
-                            <label for="wageKPI">ЗП KPI</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="wageAdditional"
-                                    type="text"
-                                    v-model.trim="wageAdditional"
-                            >
-                            <label for="wageAdditional">Дополнительные сведения о ЗП</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="workingConditions"
-                                    type="text"
-                                    v-model.trim="workingConditions"
-                            >
-                            <label for="workingConditions">Условия работы</label>
+                            <label for="probation">Испытательный срок</label>
                         </div>
 
                     </div>
@@ -162,23 +162,23 @@
     import requests from "@/utils/requests";
 
     export default {
-        name: "AddVacancies",
+        name: "AddStaff",
         data : () => ({
-            title: '',
-            type: '',
-            company: '',
+            photo: '',
+            fullNameRus: '',
+            fullNameEng: '',
+            birthDate: '',
+            address: '',
+            position: '',
+            familyContacts: '',
+            extTelephone: '',
+            telephone: '',
+            email: '',
+            skype: '',
             department: '',
-            searchReason: '',
             subordination: '',
-            responsibility: '',
-            exitToWork: '',
-            highEducation: '',
-            requiredSkill: '',
-            wageProbation: '',
-            wage: '',
-            wageKPI: '',
-            wageAdditional: '',
-            workingConditions: ''
+            hireDate: '',
+            probation: ''
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -188,21 +188,21 @@
         methods: {
             async submitHandler() {
                 const formData = {
-                    title: this.title,
-                    type: this.type,
-                    company: this.company,
+                    photo: this.photo,
+                    fullNameRus: this.fullNameRus,
+                    fullNameEng: this.fullNameEng,
+                    birthDate: this.birthDate,
+                    address: this.address,
+                    position: this.position,
+                    familyContacts: this.familyContacts,
+                    extTelephone: this.extTelephone,
+                    telephone: this.telephone,
+                    email: this.email,
+                    skype: this.skype,
                     department: this.department,
-                    searchReason: this.searchReason,
                     subordination: this.subordination,
-                    responsibility: this.responsibility,
-                    exitToWork: this.exitToWork,
-                    highEducation: this.highEducation,
-                    requiredSkill: this.requiredSkill,
-                    wageProbation: this.wageProbation,
-                    wage: this.wage,
-                    wageKPI: this.wageKPI,
-                    wageAdditional: this.wageAdditional,
-                    workingConditions: this.workingConditions
+                    hireDate: this.hireDate,
+                    probation: this.probation
                 };
 
                 for (let key in formData) {
@@ -212,10 +212,10 @@
                 }
 
                 try {
-                    const response = await requests.request('/api/vacancy/add', 'POST', formData);
+                    const response = await requests.request('/api/staff/add', 'POST', formData);
                     this.$message(response.message);
-                    if (response.message === 'Вакансия добавлена') {
-                        await this.$router.push('/hr/vacancies')
+                    if (response.message === 'Работник добавлен') {
+                        await this.$router.push('/hr/staff')
                     }
                 } catch (e) {
                     console.log(e.message)

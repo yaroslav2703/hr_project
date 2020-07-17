@@ -3,21 +3,21 @@ const Schema = database.Schema;
 
 const StaffSchema = new Schema(
     {
-        photo: { type: String, required: true },
-        fullNameRus: { type: String, required: true },
-        fullNameEng: { type: String, required: true },
-        birthDate: { type: Date, required: true },
-        address: { type: String, required: true },
-        position: { type: String, required: true },
-        familyContacts: { type: String, required: true },
-        extTelephone: { type: String, required: true },
-        telephone: { type: String, required: true },
-        email: { type: String, required: true },
-        skype: { type: String, required: true },
-        department: { type: String, required: true },
-        subordination: { type: String, required: true },
-        hireDate: { type: Date, required: true },
-        probation: { type: String, required: true }
+        photo: { type: String, required: false },
+        fullNameRus: { type: String, required: false },
+        fullNameEng: { type: String, required: false },
+        birthDate: { type: String, required: false },
+        address: { type: String, required: false },
+        position: { type: String, required: false },
+        familyContacts: { type: String, required: false },
+        extTelephone: { type: String, required: false },
+        telephone: { type: String, required: false },
+        email: { type: String, required: false },
+        skype: { type: String, required: false },
+        department: { type: String, required: false },
+        subordination: { type: String, required: false },
+        hireDate: { type: String, required: false },
+        probation: { type: String, required: false }
     },
     { timestamps: true },
 )

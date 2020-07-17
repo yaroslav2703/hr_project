@@ -4,10 +4,16 @@
         <router-link v-for="link in links" :key="link.url" tag="li" active-class="active" :to="link.url" >
             <a href="#" class="waves-effect waves-orange pointer">{{link.title}}</a>
         </router-link>
+        <li>
+            <a href="#" class="black-text" @click.prevent="logout">
+                <i class="material-icons">assignment_return</i>Выйти
+            </a>
+        </li>
     </ul>
 </template>
 
 <script>
+    import auth from "@/utils/auth";
     export default {
         name: "Sidebar",
         props: ['value'],
@@ -15,7 +21,13 @@
                 links: [
                     {title: 'Вакансии', url: '/member/vacancies'},
                 ]
-            })
+            }),
+        methods: {
+            logout() {
+                auth.logout();
+                this.$router.push('/login?message=logout')
+            }
+        },
     }
 </script>
 

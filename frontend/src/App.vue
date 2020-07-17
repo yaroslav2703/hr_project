@@ -8,7 +8,7 @@
 
 <script>
   import EmptyLayout from '@/layouts/EmptyLayout';
-  import HRLayout from "@/layouts/HRLayout";
+  import HrLayout from "@/layouts/HRLayout";
   import MemberLayout from "@/layouts/MemberLayout";
 
 export default {
@@ -19,7 +19,7 @@ export default {
     }
   },
   components: {
-    EmptyLayout, HRLayout, MemberLayout
+    EmptyLayout, HrLayout, MemberLayout
   }
 }
 </script>
