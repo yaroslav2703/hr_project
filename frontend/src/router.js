@@ -92,6 +92,12 @@ const router = new Router({
                   meta: {layout: 'member', auth: true, role: 'member'},
                   component: () => import('./views/member/ViewVacancies.vue')
             },
+            {
+                  path: '/member/response/:id',
+                  name: 'member-response-add',
+                  meta: {layout: 'member', auth: true, role: 'member'},
+                  component: () => import('./views/member/AddResponse.vue')
+            }
       ]
 });
 

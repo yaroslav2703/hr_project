@@ -3,6 +3,7 @@ const Schema = database.Schema;
 
 const VacancySchemaResponce = new Schema(
     {
+        fullName: { type: String, required: false },
         sex: { type: String, required: false },
         age: { type: String, required: false },
         skill: { type: String, required: false },

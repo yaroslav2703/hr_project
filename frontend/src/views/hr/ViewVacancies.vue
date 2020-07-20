@@ -35,11 +35,7 @@
                             </thead>
                             <tbody>
                             <tr v-for="vacancyResponse in vacancyResponses" :key="vacancyResponse._id">
-                                <td>
-                                    <a class="waves-effect waves-orange btn-flat">
-                                        {{vacancyResponse.user.email}}
-                                    </a>
-                                </td>
+                                <Response  v-bind:vacancyResponse="vacancyResponse"></Response>
                             </tr>
                              </tbody>
                          </table>
@@ -57,6 +53,7 @@
  <script>
      import messages from "@/utils/messages";
      import requests from "@/utils/requests";
+     import Response from "@/components/app/hr/vacancies/Response";
 
      export default {
          name: "ViewVacancies",
@@ -77,12 +74,16 @@
              wageKPI: '',
              wageAdditional: '',
              workingConditions: '',
-             vacancyResponses: ''
+             vacancyResponses: '',
+             user: ''
          }),
          mounted() {
              if (messages[this.$route.query.message]) {
                  this.$message(messages[this.$route.query.message])
              }
+         },
+         components: {
+             Response
          },
          async created() {
              const formData = {
@@ -95,7 +96,7 @@
                  if (response.message === 'Вакансия выбрана') {
                      this.vacancy = response.vacancy;
                      this.title = this.vacancy.title;
-                     this.type= this.vacancy.type;
+                     this.type = this.vacancy.type;
                      this.company = this.vacancy.company;
                      this.department = this.vacancy.department;
                      this.searchReason = this.vacancy.searchReason;
@@ -110,6 +111,7 @@
                      this.wageAdditional = this.vacancy.wageAdditional;
                      this.workingConditions = this.vacancy.workingConditions;
                      this.vacancyResponses = vacancy_response.vacanciesResp;
+                     this.user = this.vacancy.user;
                  }
              } catch (e) {
                  console.log(e.message)
