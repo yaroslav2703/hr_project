@@ -162,7 +162,7 @@
     import requests from "@/utils/requests";
 
     export default {
-        name: "AddVacancies",
+        name: "EditVacancies",
         data : () => ({
             vacancy: null,
             title: '',
@@ -190,9 +190,11 @@
             const formData = {
                 _id: this.$route.params.id
             };
+            console.log(formData)
             try {
                 const responce = await requests.request('/api/vacancy/get-one', 'POST', formData);
                 this.$message(responce.message);
+                console.log(responce)
                 if (responce.message === 'Вакансия выбрана') {
                     this.vacancy = responce.vacancy;
                     this.title = this.vacancy.title;

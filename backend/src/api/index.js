@@ -12,7 +12,9 @@ app.use(bodyParser.json());
 const routes = express.Router();
 require('./auth')(routes);
 require('./vacancies')(routes);
+require('./users')(routes)
 require('./staff')(routes);
+require('./vacancyResponces')(routes);
 app.use('/api', routes);
 
 const frontendDir = path.join(

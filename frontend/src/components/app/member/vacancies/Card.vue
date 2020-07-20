@@ -1,14 +1,16 @@
 <template>
-    <div class="col s3 m3 l3">
+    <div class="col s4 m4 l4">
         <div class="card blue-grey darken-5">
-            <a class="white-text">
-                <div class="card-content" >
-                    <span class="card-title">{{vacancy.title}}</span>
-                    <p>опыт: Больше 1 лет</p>
-                    <p>Уровень: Junior</p>
-                    <p>Отдел: Разработка </p>
-                </div>
-            </a>
+            <div class="card-content white-text" >
+                    <span class="card-title">
+                         <router-link :to="{ name: 'member-vacancies-view', params: { id: vacancy._id }}" >
+                                    <a class="orange-text">{{vacancy.title}}</a>
+                                </router-link>
+                    </span>
+                <p>Компания: {{vacancy.company}}</p>
+                <p>Тип: {{vacancy.type}}</p>
+                <p>Отдел: {{vacancy.department}}</p>
+            </div>
         </div>
     </div>
 </template>

@@ -3,7 +3,7 @@
         <div class="page-title">
             <h3>Сотрудники</h3>
         </div>
-        <div>
+        <div style="padding-bottom: 20px">
             <router-link :to="{ name: 'hr-staff-add'}" class="white-text">
                 <button class="btn waves-effect waves-light orange darken-2" type="button">
                     Добавить
@@ -26,7 +26,7 @@
                 </div>
             </li>
 
-            <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
+            <div style="overflow-y:scroll; overflow-x:hidden; height: 400px">
 
 
                 <div v-for="employee in employees" :key="employee._id">

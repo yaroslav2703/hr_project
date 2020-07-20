@@ -69,11 +69,29 @@ const router = new Router({
                   component: () => import('./views/hr/AddStaff.vue')
             },
             {
+                  path: '/hr/staff/edit/:id',
+                  name: 'hr-employee-edit',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/EditStaff.vue')
+            },
+            {
+                  path: '/hr/staff/view/:id',
+                  name: 'hr-staff-view',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/ViewEmployee.vue')
+            },
+            {
                   path: '/hr/staff',
                   name: 'hr-staff',
                   meta: {layout: 'hr', auth: true, role: 'hr'},
                   component: () => import('./views/hr/Staff.vue')
-            }
+            },
+            {
+                  path: '/member/vacancies/view/:id',
+                  name: 'member-vacancies-view',
+                  meta: {layout: 'member', auth: true, role: 'member'},
+                  component: () => import('./views/member/ViewVacancies.vue')
+            },
       ]
 });
 

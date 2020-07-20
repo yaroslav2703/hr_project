@@ -1,10 +1,9 @@
 <template>
     <div>
-
         <div class="row">
-            <div class="col s3 m3 l3">
-                <div class="card blue-grey lighten-5" style="min-height: 155px">
-                    <div class="card-content white-text center-align" style="padding: 50px 0px 0px 0px">
+            <div class="col s4 m4 l4">
+                <div class="card blue-grey lighten-5" style="min-height: 198px">
+                    <div class="card-content white-text center-align" style="padding: 72px 0px 0px 0px">
                         <router-link to="/hr/vacancies/add" class="white-text" >
                             <button class="btn-floating btn-large waves-effect waves-light orange darken-2">
                                 <i class="material-icons">add</i>

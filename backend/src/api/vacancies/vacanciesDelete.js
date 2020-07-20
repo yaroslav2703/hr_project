@@ -5,6 +5,8 @@ module.exports = async (req, res) => {
 
         const {_id} = req.body;
 
+        console.log('delete: ' + req.body)
+
         await Vacancy.deleteOne({_id});
 
         res.status(200).json({message: 'Вакансия удалена'})

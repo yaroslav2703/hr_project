@@ -22,7 +22,7 @@ const VacancySchema = new Schema(
         wage: { type: String, required: false },
         wageKPI: { type: String, required: false },
         wageAdditional: { type: String, required: false },
-        workingConditions: { type: String, required: false }
+        workingConditions: { type: String, required: false },
     },
     { timestamps: true },
 );

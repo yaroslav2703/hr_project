@@ -1,41 +1,23 @@
 <template>
-    <div class="col s3 m3 l3">
+    <div class="col s4 m4 l4">
         <div class="card blue-grey darken-5">
                 <div class="card-content white-text" >
-                    <li>
-                        <a
-                                class="dropdown-trigger white-text"
-                                href="#"
-                                data-target="dropdown"
-                                ref="dropdown"
-                        >
-                            <i class="material-icons right white-text">arrow_drop_down</i>
-                        </a>
-                        <ul id='dropdown' class='dropdown-content'>
-
-                            <li>
-                                <router-link :to="{ name: 'hr-vacancies-edit', params: { id: vacancy._id }}" >
-                                    <a class="waves-effect waves-teal btn-flat black-text" >
-                                        <i class="material-icons ">update</i>Изменить
-                                    </a>
-                                </router-link>
-                            </li>
-                            <li class="divider" tabindex="-1"></li>
-                            <li>
-                                <a class="waves-effect waves-teal btn-flat black-text" @click.prevent="deleteHandler(vacancy._id)">
-                                    <i class="material-icons">clear</i>Удалить
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <span class="card-title">
                          <router-link :to="{ name: 'hr-vacancies-view', params: { id: vacancy._id }}" >
                                     <a class="orange-text">{{vacancy.title}}</a>
                                 </router-link>
                     </span>
-                    <p>{{vacancy._id}}</p>
-                    <p>Уровень: Junior</p>
-                    <p>Отдел: Разработка </p>
+                    <p>Компания: {{vacancy.company}}</p>
+                    <p>Тип: {{vacancy.type}}</p>
+                    <p>Отдел: {{vacancy.department}}</p>
+                    <div class="card-action" style="height: 30px; margin-bottom: 10px;">
+                        <router-link :to="{ name: 'hr-vacancies-edit', params: { id: vacancy._id }}">
+                            <a class="orange-text">Изменить</a>
+                        </router-link>
+                        <a class="waves-effect waves-teal btn-flat black-text" @click="deleteHandler(vacancy._id)">
+                            <a class="orange-text">Удалить</a>
+                        </a>
+                    </div>
                 </div>
         </div>
     </div>
@@ -53,9 +35,12 @@
         methods: {
             async deleteHandler(id) {
 
+                console.log(id)
+
                 const formData = {
                     _id: id
                 };
+                console.log('delete: ' + formData._id)
                 try {
                     const responce = await requests.request('/api/vacancy/delete', 'DELETE', formData);
                     this.$message(responce.message);

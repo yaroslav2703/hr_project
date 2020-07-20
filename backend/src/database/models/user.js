@@ -10,8 +10,9 @@ const UserSchema = new Schema(
         password: { type: String, maxlength: 255, required: true },
         disabled: { type: Boolean, default: false },
         role: { type: String, required: true },
+        responces: [{ type: Schema.Types.ObjectId, ref: 'VacancyResponce'}],
         createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
-        updatedBy: { type: Schema.Types.ObjectId, ref: 'User' }
+        updatedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     },
     { timestamps: true },
 );
