@@ -9,9 +9,15 @@ const router = new Router({
       base: process.env.BASE_URL,
       routes: [
             {
+                  path: '/',
+                  name: 'start',
+                  meta: {layout: 'member', role: 'member'},
+                  component: () => import('./views/member/Vacancies.vue')
+            },
+            {
                   path: '/member/',
                   name: 'm-start',
-                  meta: {layout: 'member', auth: true, role: 'member'},
+                  meta: {layout: 'member', role: 'member'},
                   component: () => import('./views/member/Vacancies.vue')
             },
             {
@@ -35,7 +41,7 @@ const router = new Router({
             {
                   path: '/member/vacancies',
                   name: 'm-vacancies',
-                  meta: {layout: 'member', auth: true, role: 'member'},
+                  meta: {layout: 'member', role: 'member'},
                   component: () => import('./views/member/Vacancies.vue')
             },
             {
@@ -87,15 +93,21 @@ const router = new Router({
                   component: () => import('./views/hr/Staff.vue')
             },
             {
+                  path: '/hr/response/:id',
+                  name: 'hr-response-view',
+                  meta: {layout: 'hr', auth: true, role: 'hr'},
+                  component: () => import('./views/hr/ViewVacancyResponse.vue')
+            },
+            {
                   path: '/member/vacancies/view/:id',
                   name: 'member-vacancies-view',
-                  meta: {layout: 'member', auth: true, role: 'member'},
+                  meta: {layout: 'member', role: 'member'},
                   component: () => import('./views/member/ViewVacancies.vue')
             },
             {
                   path: '/member/response/:id',
                   name: 'member-response-add',
-                  meta: {layout: 'member', auth: true, role: 'member'},
+                  meta: {layout: 'member', role: 'member'},
                   component: () => import('./views/member/AddResponse.vue')
             }
       ]
@@ -119,12 +131,12 @@ router.beforeEach((to, from, next) => {
                         next()
                   }
                   else{
-                        next('/login');
+                        next();
                   }
 
             }
             else{
-                  next('/login');
+                  next()
             }
       }
 });

@@ -7,11 +7,6 @@
                 {{link.title}}
             </a>
         </router-link>
-        <li>
-            <a href="#" class="black-text" @click.prevent="logout">
-                <i class="material-icons">assignment_return</i>Выйти
-            </a>
-        </li>
     </ul>
 </template>
 
@@ -24,6 +19,7 @@
         data: () => ({
                 links: [
                     {title: 'Вакансии', url: '/member/vacancies', icon: 'search'},
+                    {title: 'Для сотрудников', url: '/login', icon: 'supervisor_account'},
                 ]
             }),
         methods: {

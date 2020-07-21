@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-title">
-            <h3>Новая вакансия</h3>
+            <h3>Новый отклик на вакансию</h3>
         </div>
         <div class="container" style="width: 100%">
             <form @submit.prevent="submitHandler">
@@ -17,12 +17,31 @@
                         </div>
                         <div class="input-field ">
                             <input
+                                    id="email"
+                                    type="text"
+                                    v-model.trim="email"
+                            >
+                            <label for="sex">e-mail</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
+                                    id="phoneNumber"
+                                    type="text"
+                                    v-model.trim="phoneNumber"
+                            >
+                            <label for="sex">номер телефона</label>
+                        </div>
+                        <div class="input-field ">
+                            <input
                                     id="sex"
                                     type="text"
                                     v-model.trim="sex"
                             >
                             <label for="sex">Пол</label>
                         </div>
+
+                    </div>
+                    <div class="col s6 m6 l6">
                         <div class="input-field ">
                             <input
                                     id="age"
@@ -31,10 +50,6 @@
                             >
                             <label for="age">Возраст</label>
                         </div>
-
-                    </div>
-                    <div class="col s6 m6 l6">
-
                         <div class="input-field ">
                             <input
                                     id="skill"
@@ -84,12 +99,13 @@
 <script>
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
-    import auth from "@/utils/auth";
 
     export default {
         name: "AddVacancies",
         data : () => ({
             fullName: '',
+            email: '',
+            phoneNumber: '',
             sex: '',
             age: '',
             skill: '',
@@ -105,13 +121,14 @@
             async submitHandler() {
                 const formData = {
                     fullName: this.fullName,
+                    email: this.email,
+                    phoneNumber: this.phoneNumber,
                     sex: this.sex,
                     age: this.age,
                     skill: this.skill,
                     badExperience: this.badExperience,
                     psychChar: this.psychChar,
-                    vacancy: this.$route.params.id,
-                    user: auth.GetId()
+                    vacancy: this.$route.params.id
                 };
 
                 for (let key in formData) {

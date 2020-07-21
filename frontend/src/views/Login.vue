@@ -1,7 +1,7 @@
 <template>
     <form class="card auth-card" @submit.prevent="submitHandler">
         <div class="card-content">
-            <span class="card-title">Теплосила</span>
+            <span class="card-title">Вход на страницы для содрудников</span>
             <div class="input-field">
                 <input
                         id="email"
@@ -51,6 +51,9 @@
             <p class="center">
                 Нет аккаунта?
                 <router-link to="/register">Зарегистрироваться</router-link>
+            </p>
+            <p class="center">
+                <router-link to="/">Вернуться к общей странице</router-link>
             </p>
         </div>
     </form>

@@ -75,7 +75,7 @@
              wageAdditional: '',
              workingConditions: '',
              vacancyResponses: '',
-             user: ''
+             email: ''
          }),
          mounted() {
              if (messages[this.$route.query.message]) {
@@ -111,7 +111,7 @@
                      this.wageAdditional = this.vacancy.wageAdditional;
                      this.workingConditions = this.vacancy.workingConditions;
                      this.vacancyResponses = vacancy_response.vacanciesResp;
-                     this.user = this.vacancy.user;
+                     this.email = this.vacancy.email;
                  }
              } catch (e) {
                  console.log(e.message)

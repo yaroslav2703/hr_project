@@ -4,9 +4,9 @@ module.exports = async (req, res) => {
     
     try{
 
-        const {fullName, sex, age, skill, badExperience, psychChar, vacancy, user} = req.body;
+        const {fullName, email, phoneNumber, sex, age, skill, badExperience, psychChar, vacancy} = req.body;
 
-        let vacanceResp = new VacancyResponce({fullName, sex, age, skill, badExperience, psychChar, vacancy, user});
+        let vacanceResp = new VacancyResponce({fullName, email, phoneNumber, sex, age, skill, badExperience, psychChar, vacancy});
 
 
         await vacanceResp.save();
