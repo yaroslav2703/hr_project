@@ -3,63 +3,42 @@
         <div class="page-title">
             <h3>Сотрудники</h3>
         </div>
-        <div style="padding-bottom: 20px">
-            <router-link :to="{ name: 'hr-staff-add'}" class="white-text">
-                <button class="btn waves-effect waves-light orange darken-2" type="button">
-                    Добавить
-                    <i class="material-icons right">add</i>
-                </button>
-            </router-link>
+        <Toolbar></Toolbar>
+        <FormFilter @filter="filterTable"/>
+        <div class="divider"></div>
+        <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
+            <Table  v-bind:staff="staff"></Table>
         </div>
-        <ul class="collection with-header">
-            <li class="collection-header">
-                <div style="margin-left: 10px" class="row center-align">
-                    <div class="col s4 m4 l4">
-                        <span>Сотрудники</span>
-                    </div>
-                    <div class="col s4 m4 l4">
-                        <span>Должность</span>
-                    </div>
-                    <div class="col s4 m4 l4">
-                        <span>Почта</span>
-                    </div>
-                </div>
-            </li>
-
-            <div style="overflow-y:scroll; overflow-x:hidden; height: 400px">
-
-
-                <div v-for="employee in employees" :key="employee._id">
-                    <Employee  v-bind:employee="employee"></Employee>
-                </div>
-                
-            </div>
-        </ul>
     </div>
 </template>
 
 <script>
-    import Employee from "@/components/app/hr/staff/Employee";
+    import Toolbar from "@/components/app/hr/staff/Toolbar";
+    import FormFilter from "@/components/app/hr/staff/Filter";
+    import Table from "@/components/app/hr/staff/Table";
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
 
     export default {
         name: "Staff",
         data: () => ({
-            employees: null
+            staff: null
         }),
         components: {
-            Employee
+            Toolbar, FormFilter, Table
         },
-        async created() {
+        async mounted() {
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
             const response = await requests.request('/api/staff/get');
-            this.employees = response.employees;
+            this.staff = response.staff;
+        },
+        methods: {
+            async filterTable(staff) {
+                this.staff = staff;
+            }
         }
-
-
     }
 </script>
 

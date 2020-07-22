@@ -9,6 +9,7 @@ const StaffSchema = new Schema(
         birthDate: { type: String, required: false },
         address: { type: String, required: false },
         position: { type: String, required: false },
+        internalPosition: { type: String, required: false },
         familyContacts: { type: String, required: false },
         extTelephone: { type: String, required: false },
         telephone: { type: String, required: false },
