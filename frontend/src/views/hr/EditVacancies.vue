@@ -6,7 +6,7 @@
         <div class="container" style="width: 100%">
             <form @submit.prevent="submitHandler">
                 <div class="row">
-                    <div class="col s4 m4 l4">
+                    <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2">
                         <div class="input-field ">
                             <input
                                     id="title"
@@ -16,12 +16,15 @@
                             <label class="active" for="title">Название</label>
                         </div>
                         <div class="input-field ">
-                            <input
-                                    id="type"
-                                    type="text"
-                                    v-model.trim="type"
-                            >
-                            <label class="active" for="type">Тип</label>
+                            <select v-model="type" id="type">
+                                <option value="" disabled selected>Выберите тип вакансии</option>
+                                <option value="Открытая">Открытая</option>
+                                <option value="Срочная">Срочная</option>
+                                <option value="Закрытая">Закрытая</option>
+                                <option value="Текущая">Текущая</option>
+                                <option value="Резервная">Резервная</option>
+                            </select>
+                            <label>Тип</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -40,16 +43,13 @@
                             <label class="active" for="department">Отдел</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="searchReason"
-                                    type="text"
+                                    class="materialize-textarea"
                                     v-model.trim="searchReason"
-                            >
+                            ></textarea>
                             <label class="active" for="searchReason">Причина поиска</label>
                         </div>
-
-                    </div>
-                    <div class="col s4 m4 l4">
 
                         <div class="input-field ">
                             <input
@@ -60,40 +60,39 @@
                             <label class="active" for="subordination">Подчинение</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="responsibility"
-                                    type="text"
+                                    class="materialize-textarea"
                                     v-model.trim="responsibility"
-                            >
+                            ></textarea>
                             <label class="active" for="responsibility">Обязанности</label>
                         </div>
-                        <div class="input-field ">
+                        <div class="input-field">
                             <input
                                     id="exitToWork"
                                     type="text"
-                                    v-model.trim="exitToWork"
+                                    class="datepicker"
+                                    v-model.lazy="exitToWork"
                             >
                             <label class="active" for="exitToWork">Выход на работу</label>
                         </div>
                         <div class="input-field ">
-                            <input
-                                    id="highEducation"
-                                    type="text"
-                                    v-model.trim="highEducation"
-                            >
-                            <label class="active" for="highEducation">Высшее образование</label>
+                            <select v-model="highEducation" id="highEducation">
+                                <option value="" disabled selected>Высшее образование</option>
+                                <option value="Обязательное">Обязательное</option>
+                                <option value="Желательное">Желательное</option>
+                                <option value="Не важно">Не важно</option>
+                            </select>
+                            <label>Высшее образование</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="requiredSkill"
-                                    type="text"
+                                    class="materialize-textarea"
                                     v-model.trim="requiredSkill"
-                            >
+                            ></textarea>
                             <label class="active" for="requiredSkill">Необходимые навыки работы</label>
                         </div>
-
-                    </div>
-                    <div class="col s4 m4 l4">
 
                         <div class="input-field ">
                             <input
@@ -120,32 +119,32 @@
                             <label class="active" for="wageKPI">ЗП KPI</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="wageAdditional"
-                                    type="text"
+                                    class="materialize-textarea"
                                     v-model.trim="wageAdditional"
-                            >
+                            ></textarea>
                             <label class="active" for="wageAdditional">Дополнительные сведения о ЗП</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="workingConditions"
-                                    type="text"
+                                    class="materialize-textarea"
                                     v-model.trim="workingConditions"
-                            >
+                            ></textarea>
                             <label class="active" for="workingConditions">Условия работы</label>
                         </div>
 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s4 m4 l4 offset-s4 offset-m4 offset-l4">
+                    <div class="col s3 m3 l3 offset-s4 offset-m4 offset-l4">
                         <button class="btn waves-effect waves-light blue-grey darken-5" type="submit">
                             Изменить
                             <i class="material-icons right">save</i>
                         </button>
                     </div>
-                    <div class="col s4 m4 l4">
+                    <div class="col s3 m3 l3">
                         <button class="btn waves-effect waves-light blue-grey darken-5" type="reset">
                             Сбросить
                             <i class="material-icons right">refresh</i>
@@ -185,6 +184,23 @@
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
+            var elemDate = document.querySelectorAll('.datepicker');
+            window.M.Datepicker.init(elemDate, {
+                format: 'dd.mm.yyyy',
+                i18n: {
+                    months: [ 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'декабря' ],
+                    monthsShort: [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек' ],
+                    weekdays: [ 'Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота' ],
+                    weekdaysShort: [ 'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ],
+                    weekdaysAbbrev: ['В', 'П', 'В', 'С', 'Ч', 'П', 'С'],
+                    today: 'Сегодня',
+                    clear: 'Удалить',
+                    close: 'Закрыть',
+                    firstDay: 1,
+                }
+            });
+            var elemSelect = document.querySelectorAll('select');
+            window.M.FormSelect.init(elemSelect);
         },
         async created() {
             const formData = {

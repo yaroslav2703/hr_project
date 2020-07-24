@@ -25,7 +25,7 @@
                   <router-link :to="{ name: 'hr-employee-edit', params: { id: employee._id }}" class="btn-flat">
                      <i class="material-icons blue-grey-text">edit</i>
                   </router-link>
-                  <a class="btn-flat" @click="deleteHandler(employee._id)">
+                  <a class="btn-flat modal-trigger" @click="tempId=employee._id" href="#confirmDelete">
                      <i class="material-icons blue-grey-text">clear</i>
                   </a>
                </td>
@@ -33,6 +33,19 @@
             </tbody>
          </table>
       </div>
+
+
+      <div style="width: 500px" id="confirmDelete" class="modal">
+         <div class="modal-content">
+               <h4>Подтверждение удаления</h4>
+               <p>Вы точно хотите удалить этого сотрудника?</p>
+         </div>
+         <div class="modal-footer">
+               <button class="modal-close waves-effect waves-green btn-flat">Нет</button>
+               <button @click="deleteHandler(tempId)" class="modal-close waves-effect waves-red btn-flat">Да</button>
+         </div>
+      </div>
+
    </div>
 </template>
 
@@ -42,6 +55,9 @@
     export default {
         name: "Table",
         props: ['staff'],
+        data: () => ({
+            tempId: null
+        }),
         methods: {
             async deleteHandler(id) {
                 const formData = {
@@ -93,6 +109,10 @@
                  }
               }
             }
+        },
+        mounted() {
+            var elems = document.querySelectorAll('.modal');
+            window.M.Modal.init(elems);
         }
     }
 </script>

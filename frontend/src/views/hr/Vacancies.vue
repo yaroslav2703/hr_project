@@ -1,26 +1,18 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col s4 m4 l4">
-                <div class="card blue-grey lighten-5" style="min-height: 198px">
-                    <div class="card-content white-text center-align" style="padding: 72px 0px 0px 0px">
-                        <router-link to="/hr/vacancies/add" class="white-text" >
-                            <button class="btn-floating btn-large waves-effect waves-light orange darken-2">
-                                <i class="material-icons">add</i>
-                            </button>
-                        </router-link>
-                    </div>
-                </div>
-            </div>
-            <div v-for="vacancy in vacancies" :key="vacancy._id">
-                <Card  v-bind:vacancy="vacancy" v-bind:id="vacancy._id"></Card>
-            </div>
+        <div class="page-title">
+            <h3>Вакансии</h3>
+        </div>
+        <Toolbar></Toolbar>
+        <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
+            <Table  v-bind:vacancies="vacancies"></Table>
         </div>
     </div>
 </template>
 
 <script>
-    import Card from "@/components/app/hr/vacancies/Card";
+    import Toolbar from "@/components/app/hr/vacancies/Toolbar";
+    import Table from "@/components/app/hr/vacancies/Table";
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
 
@@ -30,17 +22,20 @@
             vacancies: null
         }),
         components: {
-            Card
+            Toolbar, Table
         },
-        async created() {
+        async mounted() {
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
             const response = await requests.request('/api/vacancy/get');
             this.vacancies = response.vacancies;
         },
-
-
+        methods: {
+            async filterTable(staff) {
+                this.staff = staff;
+            }
+        }
     }
 </script>
 

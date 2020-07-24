@@ -1,17 +1,18 @@
 <template>
     <div>
-
-        <div class="row">
-            <div v-for="vacancy in vacancies" :key="vacancy._id">
-                <Card  v-bind:vacancy="vacancy"></Card>
-            </div>
+        <div class="page-title">
+            <h3>Вакансии</h3>
+        </div>
+        <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
+            <Table  v-bind:vacancies="vacancies"></Table>
         </div>
     </div>
 </template>
 
 <script>
-    import Card from "@/components/app/member/vacancies/Card";
     import requests from "@/utils/requests";
+    import Table from "@/components/app/member/vacancies/Table";
+    import messages from "@/utils/messages";
 
     export default {
         name: "Vacancies",
@@ -19,12 +20,20 @@
             vacancies: null
         }),
         components: {
-            Card
+            Table
         },
-        async created() {
-            const response = await requests.request('http://localhost:5000/api/vacancy/get');
+        async mounted() {
+            if (messages[this.$route.query.message]) {
+                this.$message(messages[this.$route.query.message])
+            }
+            const response = await requests.request('/api/vacancy/get');
             this.vacancies = response.vacancies;
         },
+        methods: {
+            async filterTable(staff) {
+                this.staff = staff;
+            }
+        }
 
 
     }
