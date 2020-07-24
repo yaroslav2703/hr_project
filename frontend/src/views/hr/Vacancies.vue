@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div v-for="vacancy in vacancies" :key="vacancy._id">
-                <Card  v-bind:vacancy="vacancy"></Card>
+                <Card  v-bind:vacancy="vacancy" v-bind:id="vacancy._id"></Card>
             </div>
         </div>
     </div>

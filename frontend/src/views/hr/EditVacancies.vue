@@ -13,7 +13,7 @@
                                     type="text"
                                     v-model.trim="title"
                             >
-                            <label for="title">Название</label>
+                            <label class="active" for="title">Название</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -21,7 +21,7 @@
                                     type="text"
                                     v-model.trim="type"
                             >
-                            <label for="type">Тип</label>
+                            <label class="active" for="type">Тип</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -29,7 +29,7 @@
                                     type="text"
                                     v-model.trim="company"
                             >
-                            <label for="company">Компания</label>
+                            <label class="active" for="company">Компания</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -37,7 +37,7 @@
                                     type="text"
                                     v-model.trim="department"
                             >
-                            <label for="department">Отдел</label>
+                            <label class="active" for="department">Отдел</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -45,7 +45,7 @@
                                     type="text"
                                     v-model.trim="searchReason"
                             >
-                            <label for="searchReason">Причина поиска</label>
+                            <label class="active" for="searchReason">Причина поиска</label>
                         </div>
 
                     </div>
@@ -57,7 +57,7 @@
                                     type="text"
                                     v-model.trim="subordination"
                             >
-                            <label for="subordination">Подчинение</label>
+                            <label class="active" for="subordination">Подчинение</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -65,7 +65,7 @@
                                     type="text"
                                     v-model.trim="responsibility"
                             >
-                            <label for="responsibility">Обязанности</label>
+                            <label class="active" for="responsibility">Обязанности</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -73,7 +73,7 @@
                                     type="text"
                                     v-model.trim="exitToWork"
                             >
-                            <label for="exitToWork">Выход на работу</label>
+                            <label class="active" for="exitToWork">Выход на работу</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -81,7 +81,7 @@
                                     type="text"
                                     v-model.trim="highEducation"
                             >
-                            <label for="highEducation">Высшее образование</label>
+                            <label class="active" for="highEducation">Высшее образование</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -89,7 +89,7 @@
                                     type="text"
                                     v-model.trim="requiredSkill"
                             >
-                            <label for="requiredSkill">Необходимые навыки работы</label>
+                            <label class="active" for="requiredSkill">Необходимые навыки работы</label>
                         </div>
 
                     </div>
@@ -101,7 +101,7 @@
                                     type="text"
                                     v-model.trim="wageProbation"
                             >
-                            <label for="wageProbation">ЗП на время испытательного срока</label>
+                            <label class="active" for="wageProbation">ЗП на время испытательного срока</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -109,7 +109,7 @@
                                     type="text"
                                     v-model.trim="wage"
                             >
-                            <label for="wage">Зарплата</label>
+                            <label class="active" for="wage">Зарплата</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -117,7 +117,7 @@
                                     type="text"
                                     v-model.trim="wageKPI"
                             >
-                            <label for="wageKPI">ЗП KPI</label>
+                            <label class="active" for="wageKPI">ЗП KPI</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -125,7 +125,7 @@
                                     type="text"
                                     v-model.trim="wageAdditional"
                             >
-                            <label for="wageAdditional">Дополнительные сведения о ЗП</label>
+                            <label class="active" for="wageAdditional">Дополнительные сведения о ЗП</label>
                         </div>
                         <div class="input-field ">
                             <input
@@ -133,7 +133,7 @@
                                     type="text"
                                     v-model.trim="workingConditions"
                             >
-                            <label for="workingConditions">Условия работы</label>
+                            <label class="active" for="workingConditions">Условия работы</label>
                         </div>
 
                     </div>

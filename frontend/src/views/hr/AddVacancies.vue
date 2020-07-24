@@ -67,14 +67,16 @@
                             >
                             <label for="responsibility">Обязанности</label>
                         </div>
-                        <div class="input-field ">
+                         <div class="input-field">
                             <input
                                     id="exitToWork"
                                     type="text"
-                                    v-model.trim="exitToWork"
+                                    class="datepicker"
+                                    v-model.lazy="exitToWork"
                             >
                             <label for="exitToWork">Выход на работу</label>
                         </div>
+
                         <div class="input-field ">
                             <input
                                     id="highEducation"
@@ -135,7 +137,6 @@
                             >
                             <label for="workingConditions">Условия работы</label>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
@@ -184,6 +185,21 @@
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
+            var elems = document.querySelectorAll('.datepicker');
+            window.M.Datepicker.init(elems, {
+                format: 'dd.mm.yyyy',
+                i18n: {
+                    months: [ 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'декабря' ],
+                    monthsShort: [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек' ],
+                    weekdays: [ 'Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота' ],
+                    weekdaysShort: [ 'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ],
+                    weekdaysAbbrev: ['В', 'П', 'В', 'С', 'Ч', 'П', 'С'],
+                    today: 'сегодня',
+                    clear: 'удалить',
+                    close: 'закрыть',
+                    firstDay: 1,
+                }
+            });
         },
         methods: {
             async submitHandler() {

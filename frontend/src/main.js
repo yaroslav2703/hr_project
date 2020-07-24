@@ -11,6 +11,7 @@ Vue.config.productionTip =
 Vue.use(messagePlugin);
 Vue.use(Vuelidate);
 
+
 new Vue({
   router,
   render: h => h(App),
