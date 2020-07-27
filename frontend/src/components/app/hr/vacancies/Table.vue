@@ -6,7 +6,7 @@
                <router-link :to="{ name: 'hr-vacancies-edit', params: { id: vacancy._id }}" class="btn-flat">
                   <i class="material-icons blue-grey-text">edit</i>
                </router-link>
-               <a class="btn-flat" @click="deleteHandler(vacancy._id)">
+               <a class="btn-flat modal-trigger" @click="tempId=vacancy._id" href="#confirmDelete">
                   <i class="material-icons blue-grey-text">clear</i>
                </a>
             </div>
@@ -16,10 +16,22 @@
                </router-link>
             </h6>
             <p>{{vacancy.company}}</p>
-            <div>Причина поиска: {{vacancy. searchReason}}</div>
-            <div>Необходимые навыки: {{vacancy. requiredSkill}}</div>
+            <div style="white-space: pre">Причина поиска: <br>{{vacancy.searchReason}}</div>
+            <div style="white-space: pre">Необходимые навыки: <br>{{vacancy.requiredSkill}}</div>
          </li>
       </ul>
+
+      <div style="width: 500px" id="confirmDelete" class="modal">
+         <div class="modal-content">
+               <h4>Подтверждение удаления</h4>
+               <p>Вы точно хотите удалить эту вакансию?</p>
+         </div>
+         <div class="modal-footer">
+               <button class="modal-close waves-effect waves-green btn-flat">Нет</button>
+               <button @click="deleteHandler(tempId)" class="modal-close waves-effect waves-red btn-flat">Да</button>
+         </div>
+      </div>
+
    </div>
 </template>
 
@@ -29,6 +41,9 @@
     export default {
         name: "Table",
         props: ['vacancies'],
+        data: () => ({
+            tempId: null
+        }),
         methods: {
             async deleteHandler(id) {
                 const formData = {
@@ -80,6 +95,10 @@
                  }
               }
             }
+        },
+        mounted() {
+            var elems = document.querySelectorAll('.modal');
+            window.M.Modal.init(elems);
         }
     }
 </script>

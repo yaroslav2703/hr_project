@@ -4,20 +4,23 @@
             <h3>{{fullNameRus}}</h3>
         </div>
         <div class="container" style="width: 100%">
-            <div>{{photo}}</div>
-            <div>{{fullNameEng}}</div>
-            <div>{{birthDate}}</div>
-            <div>{{address}}</div>
-            <div>{{position}}</div>
-            <div>{{familyContacts}}</div>
-            <div>{{extTelephone}}</div>
-            <div>{{telephone}}</div>
-            <div>{{email}}</div>
-            <div>{{skype}}</div>
-            <div>{{department}}</div>
-            <div>{{subordination}}</div>
-            <div>{{hireDate}}</div>
-            <div>{{probation}}</div>
+            <ul class="collection">
+                <li class="collection-item"><b>Фото:</b><div>{{photo}}</div></li>
+                <li class="collection-item"><b>Полное имя на английском:</b> <div>{{fullNameEng}}</div></li>
+                <li class="collection-item"><b>Дата рождения:</b> <div>{{birthDate}}</div></li>
+                <li class="collection-item"><b>Адрес:</b> <div>{{address}}</div></li>
+                <li class="collection-item"><b>Должность:</b> <div>{{position}}</div></li>
+                <li class="collection-item"><b>Внутренняя должность:</b> <div>{{internalPosition}}</div></li>
+                <li class="collection-item"><b>Контакты родственников:</b> <div>{{familyContacts}}</div></li>
+                <li class="collection-item"><b>Внутренний телефон:</b> <div>{{extTelephone}}</div></li>
+                <li class="collection-item"><b>Телефон:</b> <div>{{telephone}}</div></li>
+                <li class="collection-item"><b>Электронная почта:</b> <div>{{email}}</div></li>
+                <li class="collection-item"><b>Скайп:</b> <div>{{skype}}</div></li>
+                <li class="collection-item"><b>Отдел:</b> <div>{{department}}</div></li>
+                <li class="collection-item"><b>Подчинение:</b><div>{{subordination}}</div></li>
+                <li class="collection-item"><b>Дата приёма на работу:</b> <div>{{hireDate}}</div></li>
+                <li class="collection-item"><b>Испытательный срок:</b> <div>{{probation}}</div></li>
+            </ul>
         </div>
     </div>
 </template>
@@ -36,6 +39,7 @@
             birthDate: '',
             address: '',
             position: '',
+            internalPosition: '',
             familyContacts: '',
             extTelephone: '',
             telephone: '',
@@ -66,6 +70,7 @@
                     this.birthDate = this.employee.birthDate
                     this.address = this.employee.address
                     this.position = this.employee.position
+                    this.internalPosition = this.employee.internalPosition
                     this.familyContacts = this.employee.familyContacts
                     this.extTelephone = this.employee.extTelephone
                     this.telephone = this.employee.telephone

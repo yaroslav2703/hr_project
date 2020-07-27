@@ -11,6 +11,7 @@
                             <input
                                     id="title"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="title"
                                    >
                             <label for="title">Название</label>
@@ -32,6 +33,7 @@
                             <input
                                     id="company"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="company"
                             >
                             <label for="company">Компания</label>
@@ -40,6 +42,7 @@
                             <input
                                     id="department"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="department"
                             >
                             <label for="department">Отдел</label>
@@ -47,7 +50,7 @@
                         <div class="input-field ">
                             <textarea
                                     id="searchReason"
-                                    class="materialize-textarea"
+                                    class="materialize-textarea validate"
                                     v-model.trim="searchReason"
                             ></textarea>
                             <label for="searchReason">Причина поиска</label>
@@ -58,6 +61,7 @@
                             <input
                                     id="subordination"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="subordination"
                             >
                             <label for="subordination">Подчинение</label>
@@ -65,7 +69,7 @@
                         <div class="input-field ">
                             <textarea
                                     id="responsibility"
-                                    class="materialize-textarea"
+                                    class="materialize-textarea validate"
                                     v-model.trim="responsibility"
                             ></textarea>
                             <label for="responsibility">Обязанности</label>
@@ -74,7 +78,7 @@
                             <input
                                     id="exitToWork"
                                     type="text"
-                                    class="datepicker"
+                                    class="datepicker validate"
                                     v-model.lazy="exitToWork"
                             >
                             <label for="exitToWork">Выход на работу</label>
@@ -94,7 +98,7 @@
                         <div class="input-field ">
                             <textarea
                                     id="requiredSkill"
-                                    class="materialize-textarea"
+                                    class="materialize-textarea validate"
                                     v-model.trim="requiredSkill"
                             ></textarea>
                             <label for="requiredSkill">Необходимые навыки работы</label>
@@ -105,6 +109,7 @@
                             <input
                                     id="wageProbation"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="wageProbation"
                             >
                             <label for="wageProbation">ЗП на время испытательного срока</label>
@@ -113,6 +118,7 @@
                             <input
                                     id="wage"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="wage"
                             >
                             <label for="wage">Зарплата</label>
@@ -121,6 +127,7 @@
                             <input
                                     id="wageKPI"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="wageKPI"
                             >
                             <label for="wageKPI">ЗП KPI</label>
@@ -128,7 +135,7 @@
                         <div class="input-field ">
                             <textarea
                                     id="wageAdditional"
-                                    class="materialize-textarea"
+                                    class="materialize-textarea validate"
                                     v-model.trim="wageAdditional"
                             ></textarea>
                             <label for="wageAdditional">Дополнительные сведения о ЗП</label>
@@ -136,7 +143,7 @@
                         <div class="input-field ">
                             <textarea
                                     id="workingConditions"
-                                    class="materialize-textarea"
+                                    class="materialize-textarea validate"
                                     v-model.trim="workingConditions"
                             ></textarea>
                             <label for="workingConditions">Условия работы</label>

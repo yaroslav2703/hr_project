@@ -6,21 +6,23 @@
                     <div style="text-align: center">
                         <h5><b>Описание</b></h5>
                     </div>
-                    <div><b>Название:</b> {{title}}</div>
-                    <div><b>Тип:</b> {{type}}</div>
-                    <div><b>Компания:</b> {{company}}</div>
-                    <div><b>Отдел:</b> {{department}}</div>
-                    <div><b>Причина поиска:</b> {{searchReason}}</div>
-                    <div><b>Подчинение:</b> {{subordination}}</div>
-                    <div><b>Обязанности:</b> {{responsibility}}</div>
-                    <div><b>Выход на работу:</b> {{exitToWork}}</div>
-                    <div><b>Высшее образование:</b> {{highEducation}}</div>
-                    <div><b>Необходимые навыки работы:</b> {{requiredSkill}}</div>
-                    <div><b>ЗП на время испытательного срока:</b> {{wageProbation}}</div>
-                    <div><b>Зарплата:</b> {{wage}}</div>
-                    <div><b>ЗП KPI:</b> {{wageKPI}}</div>
-                    <div><b>Дополнительные сведения о ЗП:</b> {{wageAdditional}}</div>
-                    <div><b>Условия работы:</b> {{workingConditions}}</div>
+                    <ul class="collection">
+                        <li class="collection-item"><b>Название:</b><div>{{title}}</div></li>
+                        <li class="collection-item"><b>Тип:</b> <div>{{type}}</div></li>
+                        <li class="collection-item"><b>Компания:</b> <div>{{company}}</div></li>
+                        <li class="collection-item"><b>Отдел:</b> <div>{{department}}</div></li>
+                        <li class="collection-item"><b>Причина поиска:</b> <div>{{searchReason}}</div></li>
+                        <li class="collection-item"><b>Подчинение:</b> <div>{{subordination}}</div></li>
+                        <li class="collection-item"><b>Обязанности:</b> <div>{{responsibility}}</div></li>
+                        <li class="collection-item"><b>Выход на работу:</b> <div>{{exitToWork}}</div></li>
+                        <li class="collection-item"><b>Высшее образование:</b> <div>{{highEducation}}</div></li>
+                        <li class="collection-item"><b>Необходимые навыки работы:</b> <div>{{requiredSkill}}</div></li>
+                        <li class="collection-item"><b>ЗП на время испытательного срока:</b> <div>{{wageProbation}}</div></li>
+                        <li class="collection-item"><b>Зарплата:</b><div>{{wage}}</div></li>
+                        <li class="collection-item"><b>ЗП KPI:</b> <div>{{wageKPI}}</div></li>
+                        <li class="collection-item"><b>Дополнительные сведения о ЗП:</b> <div>{{wageAdditional}}</div></li>
+                        <li class="collection-item"><b>Условия работы:</b> <div>{{workingConditions}}</div></li>
+                    </ul>
                 </div>
                 <div class="col s4 m4 l4">
                     <div style="text-align: center">

@@ -62,6 +62,15 @@
                             <label for="position">Должность</label>
                         </div>
                         <div class="input-field ">
+                            <input
+                                    id="internalPosition"
+                                    type="text"
+                                    class="validate"
+                                    v-model.trim="internalPosition"
+                            >
+                            <label for="internalPosition">Внутренняя должность</label>
+                        </div>
+                        <div class="input-field ">
                             <textarea
                                     id="familyContacts"
                                     class="materialize-textarea validate"
@@ -177,6 +186,7 @@
             birthDate: '',
             address: '',
             position: '',
+            internalPosition: '',
             familyContacts: '',
             extTelephone: '',
             telephone: '',
@@ -218,6 +228,7 @@
                     birthDate: this.birthDate,
                     address: this.address,
                     position: this.position,
+                    internalPosition: this.internalPosition,
                     familyContacts: this.familyContacts,
                     extTelephone: this.extTelephone,
                     telephone: this.telephone,
@@ -230,7 +241,7 @@
                 };
 
                 for (let key in formData) {
-                    if (formData[key] == '') {
+                    if (formData[key] === '') {
                         formData[key] = 'Не указано'
                     }
                 }

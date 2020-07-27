@@ -6,19 +6,17 @@
                     <div style="text-align: center">
                         <h5><b>Описание</b></h5>
                     </div>
-                    <div><b>ФИО:</b> {{fullName}}</div>
-                    <div><b>E-Mail:</b> {{email}}</div>
-                    <div><b>Номер телефона:</b> {{phoneNumber}}</div>
-                    <div><b>Пол:</b> {{sex}}</div>
-                    <div><b>Возраст:</b> {{age}}</div>
-                    <div><b>Навыки:</b> {{skill}}</div>
-                    <div><b>Негативный опыт в компаниях:</b> {{badExperience}}</div>
-                    <div><b>Психологическая характеристика:</b> {{psychChar}}</div>
-
-                    <button style="margin-top: 10px" data-target="confirmDelete" class="btn waves-effect waves-light orange darken-2 off modal-trigger" type="button">
-                        Удалить отклик
-                        <i class="material-icons right">clear</i>
-                    </button>
+                    <Toolbar></Toolbar>
+                    <ul class="collection">
+                        <li class="collection-item"><b>ФИО:</b><div>{{fullName}}</div></li>
+                        <li class="collection-item"><b>E-Mail:</b> <div>{{email}}</div></li>
+                        <li class="collection-item"><b>Номер телефона:</b> <div>{{phoneNumber}}</div></li>
+                        <li class="collection-item"><b>Пол:</b> <div>{{sex}}</div></li>
+                        <li class="collection-item"><b>Возраст:</b> <div>{{age}}</div></li>
+                        <li class="collection-item"><b>Навыки:</b> <div>{{skill}}</div></li>
+                        <li class="collection-item"><b>Негативный опыт в компаниях:</b> <div>{{badExperience}}</div></li>
+                        <li class="collection-item"><b>Психологическая характеристика:</b> <div>{{psychChar}}</div></li>
+                    </ul>
 
                     <div style="width: 500px" id="confirmDelete" class="modal">
                         <div class="modal-content">
@@ -39,6 +37,7 @@
  <script>
      import messages from "@/utils/messages";
      import requests from "@/utils/requests";
+     import Toolbar from "@/components/app/hr/response/Toolbar";
 
      export default {
          name: "ViewVacancyResponse",
@@ -53,6 +52,9 @@
              badExperience: '',
              psychChar: '',
          }),
+         components: {
+             Toolbar
+         },
          mounted() {
              if (messages[this.$route.query.message]) {
                  this.$message(messages[this.$route.query.message])
