@@ -1,12 +1,12 @@
 <template>
     <div>
+        <div class="page-title">
+            <h3>Отклик</h3>
+        </div>
+        <Toolbar></Toolbar>
         <div class="container" style="width: 100%">
             <div class="row">
                 <div class="col s12 m12 l12">
-                    <div style="text-align: center">
-                        <h5><b>Описание</b></h5>
-                    </div>
-                    <Toolbar></Toolbar>
                     <ul class="collection">
                         <li class="collection-item"><b>ФИО:</b><div>{{fullName}}</div></li>
                         <li class="collection-item"><b>E-Mail:</b> <div>{{email}}</div></li>
@@ -68,9 +68,10 @@
              };
              try {
                  const response = await requests.request('/api/vacancyResp/getrespbyid', 'POST', formData);
+                 console.log(response)
                  this.$message(response.message);
                      if (response.message === 'Выбран отклик') {
-                     this.vacancyResp = response.vacancyResp[0];
+                     this.vacancyResp = response.vacancyResp;
                      this.fullName = this.vacancyResp.fullName;
                      this.email = this.vacancyResp.email;
                      this.phoneNumber = this.vacancyResp.phoneNumber;

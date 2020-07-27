@@ -5,8 +5,8 @@ module.exports = async (req, res) => {
 
         const {_id} = req.body
     
-        const vacancyResp = await VacancyResp.find({_id});
-
+        const vacancyResp = await VacancyResp.findOne({_id});
+        console.log(vacancyResp)
         res.status(201).json({message: 'Выбран отклик', vacancyResp: vacancyResp})
 
     }catch (e) {
