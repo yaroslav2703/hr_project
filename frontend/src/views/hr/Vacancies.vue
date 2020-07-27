@@ -30,10 +30,36 @@
             }
             const response = await requests.request('/api/vacancy/get');
             this.vacancies = response.vacancies;
+            for(var i = 0;i < this.vacancies.length; i++){
+                this.vacancies[i].isHide = await this.checkNewVacancies(this.vacancies[i]._id)
+                this.vacancies[i].col = await this.addColResponse(this.vacancies[i]._id)
+            }
         },
         methods: {
             async filterTable(staff) {
                 this.staff = staff;
+            },
+            async checkNewVacancies(id) {
+                const formData = {
+                    _id: id
+                }
+                try {
+                    const response = await requests.request('/api/vacancyResp/checkviewbyvacancy', 'POST', formData)
+                    return response.col > 0;
+                } catch (e) {
+                    console.log(e.message)
+                }
+            },
+            async addColResponse(id) {
+                const formData = {
+                    _id: id
+                }
+                try {
+                    const response = await requests.request('/api/vacancyResp/checkviewbyvacancy', 'POST', formData)
+                    return response.col;
+                } catch (e) {
+                    console.log(e.message)
+                }
             }
         }
     }

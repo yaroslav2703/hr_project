@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
         let vacancy = new Vacancy({title, type, department, searchReason, subordination, company, responsibility, exitToWork, highEducation,
             requiredSkill, wageProbation, wage, wageKPI, wageAdditional, workingConditions});
-        console.log(vacancy);
+
 
         await vacancy.save();
 

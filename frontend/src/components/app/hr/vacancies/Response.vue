@@ -1,6 +1,6 @@
 <template>
     <td>
-        <router-link :to="{ name: 'hr-response-view', params: { id: vacancyResponse._id }}">
+        <router-link :to="{ name: 'hr-response-view', params: { id: vacancyResponse._id }}" >
             {{email}}
         </router-link>
     </td>

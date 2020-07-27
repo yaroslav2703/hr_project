@@ -55,20 +55,31 @@
          components: {
              Toolbar
          },
-         mounted() {
+         async mounted() {
+             const formData = {
+                 _id: this.$route.params.id
+             };
              if (messages[this.$route.query.message]) {
                  this.$message(messages[this.$route.query.message])
              }
              const elem = document.querySelectorAll('.modal')
              window.M.Modal.init(elem)
+             try {
+                 const response_two = await requests.request('/api/vacancyResp/viewed', 'POST', formData);
+                 if (response_two.message === 'Отклик помечен как просмотренный') {
+                    console.log('hello')
+                 }
+             } catch (e) {
+                 console.log(e.message)
+             }
          },
          async created() {
              const formData = {
                  _id: this.$route.params.id
              };
              try {
+
                  const response = await requests.request('/api/vacancyResp/getrespbyid', 'POST', formData);
-                 console.log(response)
                  this.$message(response.message);
                      if (response.message === 'Выбран отклик') {
                      this.vacancyResp = response.vacancyResp;

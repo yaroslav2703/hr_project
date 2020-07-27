@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="page-title">
+            <h3>Вакансия</h3>
+        </div>
         <div class="container" style="width: 100%">
             <div class="row">
                 <div class="col s8 m8 l8">

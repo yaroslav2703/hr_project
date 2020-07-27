@@ -2,6 +2,9 @@
    <div>
       <ul class="collection">
          <li class="collection-item" v-for="vacancy in vacancies" :key="vacancy._id">
+            <template v-if="vacancy.isHide">
+               <span class="new badge waves-effect waves-light orange darken-2">{{vacancy.col}}</span>
+            </template>
             <div class="secondary-content">
                <router-link :to="{ name: 'hr-vacancies-edit', params: { id: vacancy._id }}" class="btn-flat">
                   <i class="material-icons blue-grey-text">edit</i>
@@ -42,7 +45,8 @@
         name: "Table",
         props: ['vacancies'],
         data: () => ({
-            tempId: null
+            tempId: null,
+            col: 0,
         }),
         methods: {
             async deleteHandler(id) {
@@ -99,6 +103,7 @@
         mounted() {
             var elems = document.querySelectorAll('.modal');
             window.M.Modal.init(elems);
+
         }
     }
 </script>

@@ -23,6 +23,8 @@ const VacancySchema = new Schema(
         wageKPI: { type: String, required: false },
         wageAdditional: { type: String, required: false },
         workingConditions: { type: String, required: false },
+        isHide: { type: Boolean, default: false, required: true },
+        col: { type: String, default: '0', required: false }
     },
     { timestamps: true },
 );
