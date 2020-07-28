@@ -4,6 +4,7 @@
             <h3>Вакансии</h3>
         </div>
         <Toolbar></Toolbar>
+        <FormFilter @filter="filterTable"/>
         <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
             <Table  v-bind:vacancies="vacancies"></Table>
         </div>
@@ -12,6 +13,7 @@
 
 <script>
     import Toolbar from "@/components/app/hr/vacancies/Toolbar";
+    import FormFilter from "@/components/app/hr/vacancies/Filter";
     import Table from "@/components/app/hr/vacancies/Table";
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
@@ -22,7 +24,7 @@
             vacancies: null
         }),
         components: {
-            Toolbar, Table
+            Toolbar, FormFilter, Table
         },
         async mounted() {
             if (messages[this.$route.query.message]) {
@@ -32,12 +34,34 @@
             this.vacancies = response.vacancies;
             for(var i = 0;i < this.vacancies.length; i++){
                 this.vacancies[i].isHide = await this.checkNewVacancies(this.vacancies[i]._id)
+                const formData = {
+                    _id: this.vacancies[i]._id,
+                    isHide: this.vacancies[i].isHide
+                }
+                try {
+                    const response = await requests.request('/api/vacancy/updateResponse', 'POST', formData)
+                    console.log(response.message)
+                } catch (e) {
+                    console.log(e.message)
+                }
+
                 this.vacancies[i].col = await this.addColResponse(this.vacancies[i]._id)
+                const formData2 = {
+                    _id: this.vacancies[i]._id,
+                    col: this.vacancies[i].col
+                }
+                try {
+                    const response = await requests.request('/api/vacancy/updateResponseCol', 'POST', formData2)
+                    console.log(response.message)
+
+                } catch (e) {
+                    console.log(e.message)
+                }
             }
         },
         methods: {
-            async filterTable(staff) {
-                this.staff = staff;
+            async filterTable(vacancies) {
+                this.vacancies = vacancies;
             },
             async checkNewVacancies(id) {
                 const formData = {

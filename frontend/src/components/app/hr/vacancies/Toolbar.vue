@@ -11,7 +11,11 @@
 
 <script>
     export default {
-        name: "Toolbar"
+        name: "Toolbar",
+        mounted() {
+            var elemSelect = document.querySelectorAll('select');
+            window.M.FormSelect.init(elemSelect);
+        }
     }
 </script>
 
