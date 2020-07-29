@@ -1,20 +1,27 @@
 <template>
     <div>
         <div class="page-title">
-            <h3>Измнить профиль сотрудника</h3>
+            <h3>Изменить профиль сотрудника</h3>
         </div>
         <div class="container" style="width: 100%">
             <form @submit.prevent="submitHandler">
                 <div class="row">
                     <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2">
-                        <div class="input-field ">
-                            <input
-                                    id="photo"
-                                    type="text"
-                                    v-model.trim="photo"
-                                   >
-                            <label class="active" for="photo">Путь к фотографии</label>
+
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Файл</span>
+                                <input name="photo" accept="image/*" @change="onFilePicked" type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Выберите файл">
+                            </div>
                         </div>
+
+                        <div class="center-align">
+                            <img id="img" :src="`data:image/png;base64,${oldPhoto}`" height="150">
+                        </div>
+
                         <div class="input-field ">
                             <input
                                     id="fullNameRus"
@@ -167,12 +174,13 @@
 <script>
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
+    import axios from 'axios'
 
     export default {
         name: "EditStaff",
         data : () => ({
             employee: null,
-            photo: '',
+            photo: null,
             fullNameRus: '',
             fullNameEng: '',
             birthDate: '',
@@ -186,7 +194,10 @@
             department: '',
             subordination: '',
             hireDate: '',
-            probation: ''
+            probation: '',
+            photoView: '',
+            oldPhoto: null,
+            image: null
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -212,15 +223,24 @@
         },
 
         async created() {
-            const formData = {
-                _id: this.$route.params.id
-            }
+
+            let fData = new FormData()
+            fData.append('_id', this.$route.params.id)
+
+            let tempImg = null
+            
+            await axios.post('/api/staff/get-one-file', fData).then(res => {
+                tempImg = res.data
+            }).catch(error => {
+                console.log(error)
+            })
+            this.oldPhoto = tempImg
+
             try {
-                const responce = await requests.request('/api/staff/get-one', 'POST', formData)
+                const responce = await requests.request('/api/staff/get-one', 'POST', {_id: this.$route.params.id})
                 this.$message(responce.message)
                 if (responce.message === 'Сотрудник выбран') {
                     this.employee = responce.employee
-                    this.photo = this.employee.photo
                     this.fullNameRus = this.employee.fullNameRus
                     this.fullNameEng = this.employee.fullNameEng
                     this.birthDate = this.employee.birthDate
@@ -268,15 +288,60 @@
                     }
                 }
 
+                let fData = new FormData()
+
+                for (let key in formData) {
+                    if (!(key == 'photo')) {
+                        fData.append(key, formData[key])
+                    }
+                }
+
+                if (this.photo != null) {
+                    fData.append('photo', this.photo, 'image.png')
+                } else {
+                    fData.append('photo', 'IMG')
+                }
+
                 try {
+
+                    await axios.post('/api/staff/update', fData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then((res) => {
+                        console.log(res.data)
+                        this.$message(res.data.message);
+                        if (res.data.message === 'Работник обновлен!') {
+                            this.$router.push('/hr/staff')
+                        }
+                    })
+                    
+
+                    /*
                     const response = await requests.request('/api/staff/update', 'PUT', formData);
                     this.$message(response.message);
                     if (response.message === 'Работник обновлен!') {
                         await this.$router.push('/login?message=staff')
                     }
+                    */
                 } catch (e) {
                     console.log(e.message)
                 }
+            },
+            onFilePicked(event) {
+                const file = event.target.files
+                let fileName = file[0].name
+                if (fileName.lastIndexOf('.') <= 0) {
+                    return alert('Please add a valid file!')
+                }
+                const fileReader = new FileReader()
+                fileReader.addEventListener('load', () => {
+                    this.photoView = fileReader.result
+                    document.getElementById("img").src = this.photoView
+                })
+                fileReader.readAsDataURL(file[0])
+                this.image = file[0]
+                this.photo = this.image
             }
         }
     }

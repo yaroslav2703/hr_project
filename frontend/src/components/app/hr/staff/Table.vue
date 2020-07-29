@@ -4,15 +4,19 @@
          <table class="highlight centered responsive-table" id="staffTable">
             <thead>
             <tr>
-               <th @click="sortTable(0)" style="cursor: pointer">ФИО</th>
-               <th @click="sortTable(1)" style="cursor: pointer">Должность</th>
-               <th @click="sortTable(2)" style="cursor: pointer">Внутренняя должность</th>
-               <th @click="sortTable(3)" style="cursor: pointer">Почта</th>
+               <th>Фото</th>
+               <th @click="sortTable(1)" style="cursor: pointer">ФИО</th>
+               <th @click="sortTable(2)" style="cursor: pointer">Должность</th>
+               <th @click="sortTable(3)" style="cursor: pointer">Внутренняя должность</th>
+               <th @click="sortTable(4)" style="cursor: pointer">Почта</th>
                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="employee in staff" :key="employee._id">
+               <td>
+                  <StaffImg v-bind:id="employee._id"/>
+               </td>
                <td>
                   <router-link :to="{ name: 'hr-staff-view', params: { id: employee._id }}" class="orange-text" >
                      {{employee.fullNameRus}}
@@ -51,6 +55,7 @@
 
 <script>
    import requests from "@/utils/requests";
+   import StaffImg from '@/components/app/hr/staff/StaffImg'
 
     export default {
         name: "Table",
@@ -58,6 +63,9 @@
         data: () => ({
             tempId: null
         }),
+        components: {
+           StaffImg
+        },
         methods: {
             async deleteHandler(id) {
                 const formData = {

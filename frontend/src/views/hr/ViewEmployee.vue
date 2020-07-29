@@ -5,7 +5,9 @@
         </div>
         <div class="container" style="width: 100%">
             <ul class="collection">
-                <li class="collection-item"><b>Фото:</b><div>{{photo}}</div></li>
+                <li class="collection-item"><b>Фото:</b>
+                    <img class="materialboxed" :src="`data:image/png;base64,${img}`" height="150">
+                </li>
                 <li class="collection-item"><b>Полное имя на английском:</b> <div>{{fullNameEng}}</div></li>
                 <li class="collection-item"><b>Дата рождения:</b> <div>{{birthDate}}</div></li>
                 <li class="collection-item"><b>Адрес:</b> <div>{{address}}</div></li>
@@ -28,6 +30,7 @@
 <script>
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
+    import axios from 'axios'
 
     export default {
         name: "ViewEmployee",
@@ -48,23 +51,35 @@
             department: '',
             subordination: '',
             hireDate: '',
-            probation: ''
+            probation: '',
+            img: null
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
+            var elemImg = document.querySelectorAll('.materialboxed');
+            window.M.Materialbox.init(elemImg);
         },
         async created() {
-            const formData = {
-                _id: this.$route.params.id
-            };
+            
+            let fData = new FormData()
+            fData.append('_id', this.$route.params.id)
+
+            let tempImg = null
+            
+            await axios.post('/api/staff/get-one-file', fData).then(res => {
+                tempImg = res.data
+            }).catch(error => {
+                console.log(error)
+            })
+            this.img = tempImg
+            
             try {
-                const responce = await requests.request('/api/staff/get-one', 'POST', formData);
+                const responce = await requests.request('/api/staff/get-one', 'POST', {_id: this.$route.params.id});
                 this.$message(responce.message);
                 if (responce.message === 'Сотрудник выбран') {
                     this.employee = responce.employee
-                    this.photo = this.employee.photo
                     this.fullNameRus = this.employee.fullNameRus
                     this.fullNameEng = this.employee.fullNameEng
                     this.birthDate = this.employee.birthDate

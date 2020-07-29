@@ -1,9 +1,18 @@
 const Staff = require('../../database/models/staff');
+const fs = require('fs')
 
 module.exports = async (req, res) => {
     try{
 
         const {_id} = req.body;
+
+        const candidate = await Staff.findOne({_id})
+
+        if(candidate.photo != 'noImage') {
+            await fs.unlink('uploads/' + candidate.photo, (err) => {
+                if (err) console.log(err)
+            })
+        }
 
         await Staff.deleteOne({_id});
 

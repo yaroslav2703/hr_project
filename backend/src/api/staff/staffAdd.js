@@ -1,6 +1,6 @@
 const Staff = require('../../database/models/staff');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     
     try{
 
@@ -10,6 +10,11 @@ module.exports = async (req, res) => {
         let staff = new Staff({photo, fullNameRus, fullNameEng, birthDate, address, position, internalPosition, familyContacts, extTelephone, telephone,
             email, skype, department, subordination, hireDate, probation});
 
+        if (req.files[0]) {
+            staff.photo = req.files[0].filename
+        } else {
+            staff.photo = 'noImage'
+        }
 
         await staff.save();
 

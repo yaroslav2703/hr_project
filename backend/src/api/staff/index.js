@@ -7,8 +7,10 @@ module.exports = (app) => {
 
     app.post('/staff/add', require('./staffAdd'));
 
+    app.post('/staff/get-one-file', require('./staffGetOneFile'))
+
     app.delete('/staff/delete', require('./staffDelete'));
     
-    app.put('/staff/update', require('./staffUpdate'));
+    app.post('/staff/update', require('./staffUpdate'));
 
 };

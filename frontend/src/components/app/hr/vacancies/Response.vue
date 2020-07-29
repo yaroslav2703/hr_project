@@ -1,6 +1,9 @@
 <template>
     <td>
-        <router-link :to="{ name: 'hr-response-view', params: { id: vacancyResponse._id }}" >
+        <router-link :to="{ name: 'hr-response-view', params: { id: vacancyResponse._id }}" v-if="!vacancyResponse.viewed" class="orange-text">
+            {{email}}
+        </router-link>
+        <router-link :to="{ name: 'hr-response-view', params: { id: vacancyResponse._id }}" v-if="vacancyResponse.viewed">
             {{email}}
         </router-link>
     </td>

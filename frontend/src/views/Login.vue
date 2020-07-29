@@ -49,10 +49,6 @@
             </div>
 
             <p class="center">
-                Нет аккаунта?
-                <router-link to="/register">Зарегистрироваться</router-link>
-            </p>
-            <p class="center">
                 <router-link to="/">Вернуться к общей странице</router-link>
             </p>
         </div>

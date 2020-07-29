@@ -51,6 +51,7 @@
              skill: '',
              badExperience: '',
              psychChar: '',
+             messages: ''
          }),
          components: {
              Toolbar
@@ -66,9 +67,7 @@
              window.M.Modal.init(elem)
              try {
                  const response_two = await requests.request('/api/vacancyResp/viewed', 'POST', formData);
-                 if (response_two.message === 'Отклик помечен как просмотренный') {
-                    console.log('hello')
-                 }
+                 this.messages = response_two.message
              } catch (e) {
                  console.log(e.message)
              }

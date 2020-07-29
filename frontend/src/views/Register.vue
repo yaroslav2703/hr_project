@@ -43,14 +43,13 @@
                         class="btn waves-effect waves-light auth-submit blue-grey darken-5"
                         type="submit"
                 >
-                    Зарегистрироваться
+                    Зарегистрировать
                     <i class="material-icons right">send</i>
                 </button>
             </div>
 
             <p class="center">
-                Уже есть аккаунт?
-                <router-link to="/login">Войти!</router-link>
+                <router-link to="/hr">Вернуться назад</router-link>
             </p>
         </div>
     </form>
@@ -86,7 +85,7 @@
                     const responce = await requests.request('/api/auth/register', 'POST', formData);
                     this.$message(responce.message);
                     if (responce.message === 'Пользователь создан') {
-                        await this.$router.push('/login')
+                        await this.$router.push('/hr')
                     }
 
                 }catch (e) {

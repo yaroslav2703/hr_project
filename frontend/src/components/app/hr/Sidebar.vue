@@ -24,7 +24,8 @@
         data: () => ({
                 links: [
                     {title: 'Вакансии', url: '/hr/vacancies', icon: 'search'},
-                    {title: 'Сотрудники', url: '/hr/staff', icon: 'group' }
+                    {title: 'Сотрудники', url: '/hr/staff', icon: 'group' },
+                    {title: 'Регистрация', url: '/register', icon: 'person_add' },
                 ]
             }),
         methods: {

@@ -22,8 +22,8 @@ module.exports = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 15);
-        const member = 'member';
-        const user = new User({ email, password: hashedPassword, role: member });
+        const hr = 'hr';
+        const user = new User({ email, password: hashedPassword, role: hr });
 
         await user.save();
 

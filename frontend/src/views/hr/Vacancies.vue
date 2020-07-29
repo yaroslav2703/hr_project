@@ -21,7 +21,8 @@
     export default {
         name: "Vacancies",
         data: () => ({
-            vacancies: null
+            vacancies: null,
+            messages: null
         }),
         components: {
             Toolbar, FormFilter, Table
@@ -40,7 +41,7 @@
                 }
                 try {
                     const response = await requests.request('/api/vacancy/updateResponse', 'POST', formData)
-                    console.log(response.message)
+                    this.messages = response.message
                 } catch (e) {
                     console.log(e.message)
                 }
@@ -52,7 +53,7 @@
                 }
                 try {
                     const response = await requests.request('/api/vacancy/updateResponseCol', 'POST', formData2)
-                    console.log(response.message)
+                    this.messages = response.message
 
                 } catch (e) {
                     console.log(e.message)

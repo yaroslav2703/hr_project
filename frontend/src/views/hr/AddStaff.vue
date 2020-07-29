@@ -4,17 +4,24 @@
             <h3>Новый сотрудник</h3>
         </div>
         <div class="container" style="width: 100%">
-            <form @submit.prevent="submitHandler">
+            <form enctype="multipart/form-data" @submit.prevent="submitHandler">
                 <div class="row">
                     <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2">
-                        <div class="input-field ">
-                            <input
-                                    id="photo"
-                                    type="text"
-                                    v-model.trim="photo"
-                                   >
-                            <label for="photo">Путь к фотографии</label>
+
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Файл</span>
+                                <input name="photo" accept="image/*" @change="onFilePicked" type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Выберите файл">
+                            </div>
                         </div>
+
+                        <div class="center-align">
+                            <img :src="photoView" height="150">
+                        </div>
+
                         <div class="input-field ">
                             <input
                                     id="fullNameRus"
@@ -175,12 +182,13 @@
 
 <script>
     import messages from "@/utils/messages";
-    import requests from "@/utils/requests";
+    //import requests from "@/utils/requests";
+    import axios from 'axios'
 
     export default {
         name: "AddStaff",
         data : () => ({
-            photo: '',
+            photo: null,
             fullNameRus: '',
             fullNameEng: '',
             birthDate: '',
@@ -195,7 +203,9 @@
             department: '',
             subordination: '',
             hireDate: '',
-            probation: ''
+            probation: '',
+            photoView: '',
+            image: null
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -246,15 +256,49 @@
                     }
                 }
 
-                try {
-                    const response = await requests.request('/api/staff/add', 'POST', formData);
-                    this.$message(response.message);
-                    if (response.message === 'Работник добавлен') {
-                        await this.$router.push('/hr/staff')
+                let fData = new FormData()
+
+                for (let key in formData) {
+                    if (!(key == 'photo')) {
+                        fData.append(key, formData[key])
                     }
+                }
+
+                if (this.photo != null) {
+                    fData.append('photo', this.photo, 'image.png')
+                } else {
+                    fData.append('photo', 'IMG')
+                }
+                
+                
+                try {
+                    await axios.post('/api/staff/add', fData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then((res) => {
+                        this.$message(res.data.message);
+                        if (res.data.message === 'Работник добавлен') {
+                            this.$router.push('/hr/staff')
+                        }
+                    })
                 } catch (e) {
                     console.log(e.message)
                 }
+            },
+            onFilePicked(event) {
+                const file = event.target.files
+                let fileName = file[0].name
+                if (fileName.lastIndexOf('.') <= 0) {
+                    return alert('Please add a valid file!')
+                }
+                const fileReader = new FileReader()
+                fileReader.addEventListener('load', () => {
+                    this.photoView = fileReader.result
+                })
+                fileReader.readAsDataURL(file[0])
+                this.image = file[0]
+                this.photo = this.image
             }
         }
     }
