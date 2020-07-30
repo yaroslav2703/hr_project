@@ -3,10 +3,17 @@
         <div class="page-title">
             <h3>Вакансии</h3>
         </div>
-        <Toolbar></Toolbar>
-        <FormFilter @filter="filterTable"/>
-        <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
-            <Table  v-bind:vacancies="vacancies"></Table>
+        <div class="preloader-wrapper big active preloader-page" v-if="showPreloader">
+            <Preloader/>
+        </div>
+        <div v-else>
+            <Toolbar @openFilter="openFilter"/>
+            <template v-if="isopen">
+                <FormFilter @filter="filterTable"/>
+            </template>
+            <div style="overflow-y:scroll; overflow-x:hidden; height: 500px">
+                <Table  v-bind:vacancies="vacancies"></Table>
+            </div>
         </div>
     </div>
 </template>
@@ -15,6 +22,7 @@
     import Toolbar from "@/components/app/hr/vacancies/Toolbar";
     import FormFilter from "@/components/app/hr/vacancies/Filter";
     import Table from "@/components/app/hr/vacancies/Table";
+    import Preloader from "@/components/app/ shared/Preloader";
     import messages from "@/utils/messages";
     import requests from "@/utils/requests";
 
@@ -22,17 +30,22 @@
         name: "Vacancies",
         data: () => ({
             vacancies: null,
-            messages: null
+            messages: null,
+            isopen: false,
+            showPreloader: true
         }),
         components: {
-            Toolbar, FormFilter, Table
+            Toolbar, FormFilter, Table, Preloader
         },
         async mounted() {
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
             const response = await requests.request('/api/vacancy/get');
-            this.vacancies = response.vacancies;
+            if (response.message === 'Выбраны все вакансии'){
+                this.vacancies = response.vacancies;
+                this.showPreloader = false
+            }
             for(var i = 0;i < this.vacancies.length; i++){
                 this.vacancies[i].isHide = await this.checkNewVacancies(this.vacancies[i]._id)
                 const formData = {
@@ -63,6 +76,9 @@
         methods: {
             async filterTable(vacancies) {
                 this.vacancies = vacancies;
+            },
+            async openFilter(){
+                this.isopen = !this.isopen;
             },
             async checkNewVacancies(id) {
                 const formData = {

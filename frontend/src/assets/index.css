@@ -11,6 +11,11 @@
     padding-top:5rem;
     height:100vh
 }
+.preloader-page{
+    margin-top: 20%;
+    margin-left: 50%;
+    margin-right: 50%;
+}
 .auth-card{
     width:500px
 }
@@ -121,4 +126,7 @@
 }
 .history-chart{
     max-width:600px;margin:0 auto
+}
+.textWrap {
+    white-space: pre
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form @submit.prevent="submitHandler">
+        <form @submit.prevent="submitHandler" @reset.prevent="resetHandler">
             <div class="row">
                 <div class="col s6 m6 l6">
                     <div class="input-field">
@@ -13,7 +13,7 @@
                     </div>
                     <div class="input-field">
                         <select v-model.trim="isHide" id="isHide">
-                            <option value="" disabled selected>Выберите наличие новых откликов</option>
+                            <option value="null" disabled selected>Выберите наличие новых откликов</option>
                             <option value="true">Есть</option>
                             <option value="false">Нет</option>
                         </select>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="input-field">
                         <select v-model.trim="type" id="type">
-                            <option value="" disabled selected>Выберите тип вакансии</option>
+                            <option value="null" disabled selected>Выберите тип вакансии</option>
                             <option value="Открытая">Открытая</option>
                             <option value="Срочная">Срочная</option>
                             <option value="Закрытая">Закрытая</option>
@@ -72,8 +72,18 @@
             type: null
 
         }),
+        mounted() {
+            var elemSelect = document.querySelectorAll('select');
+            window.M.FormSelect.init(elemSelect);
+        },
         methods: {
             async submitHandler() {
+                if (this.isHide === 'null'){
+                    this.isHide = null
+                }
+                if (this.type === 'null'){
+                    this.type = null
+                }
                 const formData = {
                     title: this.title,
                     company: this.company,
@@ -87,6 +97,12 @@
                 } catch (e) {
                     console.log(e.message)
                 }
+            },
+            async resetHandler() {
+                this.title = null
+                this.company = null
+                this.isHide = null
+                this.type = null
             }
         }
     }

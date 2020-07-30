@@ -10,11 +10,11 @@
 
                         <div class="file-field input-field">
                             <div class="btn">
-                                <span>Файл</span>
+                                <span>Фото</span>
                                 <input name="photo" accept="image/*" @change="onFilePicked" type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Выберите файл">
+                                <input class="file-path validate" type="text" placeholder="Выберите фото сотрудника">
                             </div>
                         </div>
 

@@ -6,42 +6,47 @@
         <div class="container" style="width: 100%">
             <form @submit.prevent="submitHandler">
                 <div class="row">
-                    <div class="col s6 m6 l6">
+                    <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+
                         <div class="input-field ">
                             <input
                                     id="fullName"
                                     type="text"
+                                    class="validate"
                                     v-model.trim="fullName"
                                    >
                             <label for="fullName">ФИО (Рус.)</label>
                         </div>
+
                         <div class="input-field ">
                             <input
                                     id="email"
-                                    type="text"
+                                    type="email"
+                                    class="validate"
                                     v-model.trim="email"
                             >
-                            <label for="sex">e-mail</label>
+                            <label for="email">e-mail</label>
                         </div>
+
                         <div class="input-field ">
                             <input
                                     id="phoneNumber"
-                                    type="text"
+                                    type="tel"
+                                    class="validate"
                                     v-model.trim="phoneNumber"
                             >
-                            <label for="sex">номер телефона</label>
-                        </div>
-                        <div class="input-field ">
-                            <input
-                                    id="sex"
-                                    type="text"
-                                    v-model.trim="sex"
-                            >
-                            <label for="sex">Пол</label>
+                            <label for="phoneNumber">Номер телефона</label>
                         </div>
 
-                    </div>
-                    <div class="col s6 m6 l6">
+                        <div class="input-field ">
+                            <select v-model="sex" id="sex">
+                                    <option value="" disabled selected>Выберите пол</option>
+                                    <option value="Мужчина">Мужчина</option>
+                                    <option value="Женщина">Женщина</option>
+                                </select>
+                            <label>Пол</label>
+                        </div>
+
                         <div class="input-field ">
                             <input
                                     id="age"
@@ -51,30 +56,31 @@
                             <label for="age">Возраст</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="skill"
-                                    type="text"
+                                    class="materialize-textarea validate"
                                     v-model.trim="skill"
-                            >
+                            ></textarea>
                             <label for="skill">Навыки</label>
                         </div>
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="badExperience"
-                                    type="text"
+                                    class="materialize-textarea validate"
                                     v-model.trim="badExperience"
-                            >
+                            ></textarea>
                             <label for="badExperience">Негативный опыт работы в компаниях</label>
                         </div>
 
                         <div class="input-field ">
-                            <input
+                            <textarea
                                     id="psychChar"
-                                    type="text"
+                                    class="materialize-textarea validate"
                                     v-model.trim="psychChar"
-                            >
+                            ></textarea>
                             <label for="psychChar">Психологическая характеристика</label>
                         </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -116,6 +122,8 @@
             if (messages[this.$route.query.message]) {
                 this.$message(messages[this.$route.query.message])
             }
+            var elemSelect = document.querySelectorAll('select');
+            window.M.FormSelect.init(elemSelect);
         },
         methods: {
             async submitHandler() {

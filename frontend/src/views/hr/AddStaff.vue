@@ -10,11 +10,11 @@
 
                         <div class="file-field input-field">
                             <div class="btn">
-                                <span>Файл</span>
+                                <span>Фото</span>
                                 <input name="photo" accept="image/*" @change="onFilePicked" type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Выберите файл">
+                                <input class="file-path validate" type="text" placeholder="Выберите фото сотрудника">
                             </div>
                         </div>
 
@@ -159,6 +159,16 @@
                             <label for="probation">Испытательный срок</label>
                         </div>
 
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Выбрать документы</span>
+                                <input @change="documentPicked" type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Выберите документы">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -205,7 +215,8 @@
             hireDate: '',
             probation: '',
             photoView: '',
-            image: null
+            image: null,
+            documents: []
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -265,11 +276,16 @@
                 }
 
                 if (this.photo != null) {
-                    fData.append('photo', this.photo, 'image.png')
+                    fData.append('photo', this.photo)
                 } else {
                     fData.append('photo', 'IMG')
                 }
-                
+
+                if(this.documents != null) {
+                    fData.append('documents', this.documents)
+                } else {
+                    fData.append('documents', 'DOC')
+                }                
                 
                 try {
                     await axios.post('/api/staff/add', fData, {
@@ -299,6 +315,12 @@
                 fileReader.readAsDataURL(file[0])
                 this.image = file[0]
                 this.photo = this.image
+            },
+            documentPicked() {
+                const files = event.target.files
+                const fReader = new FileReader()
+                fReader.readAsDataURL(files[0])
+                this.documents = files[0]
             }
         }
     }

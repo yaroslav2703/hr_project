@@ -1,8 +1,11 @@
 const Staff = require('../../database/models/staff');
+const fs = require('fs')
 
 module.exports = async (req, res, next) => {
     
     try{
+
+        console.log(req.files)
 
         const {photo, fullNameRus, fullNameEng, birthDate, address, position, internalPosition, familyContacts, extTelephone, telephone,
             email, skype, department, subordination, hireDate, probation} = req.body;
@@ -10,11 +13,17 @@ module.exports = async (req, res, next) => {
         let staff = new Staff({photo, fullNameRus, fullNameEng, birthDate, address, position, internalPosition, familyContacts, extTelephone, telephone,
             email, skype, department, subordination, hireDate, probation});
 
-        if (req.files[0]) {
-            staff.photo = req.files[0].filename
+        
+        if (req.files.photo) {
+            const file = req.files.photo
+            file.mv("./uploads/" + req.files.photo.md5, (err) => {
+                if (err) console.log(err)
+            })
+            staff.photo = file.md5
         } else {
             staff.photo = 'noImage'
         }
+        
 
         await staff.save();
 

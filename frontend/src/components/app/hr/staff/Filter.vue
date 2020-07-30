@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form @submit.prevent="submitHandler">
+        <form @submit.prevent="submitHandler" @reset.prevent="resetHandler">
             <div class="row">
                 <div class="col s6 m6 l6">
                     <div class="input-field">
@@ -83,6 +83,12 @@
                 } catch (e) {
                     console.log(e.message)
                 }
+            },
+            async resetHandler() {
+                this.fullNameRus = null
+                this.position = null
+                this.internalPosition = null
+                this.email = null
             }
         }
     }

@@ -29,15 +29,17 @@
                             <label>Тип</label>
 
                         </div>
+
                         <div class="input-field ">
-                            <input
-                                    id="company"
-                                    type="text"
-                                    class="validate"
-                                    v-model.trim="company"
-                            >
-                            <label for="company">Компания</label>
+                            <select v-model="company" id="company">
+                                <option value="" disabled selected>Выберите компанию</option>
+                                <option value="ООО 'Завод Теплосила'">ООО "Завод Теплосила"</option>
+                                <option value="ООО 'ПК Теплосила'"> ООО "ПК Теплосила"</option>
+                                <option value="ООО 'ТеплоЭнергоСила'">ООО "ТеплоЭнергоСила"</option>
+                            </select>
+                            <label>Компания</label>
                         </div>
+
                         <div class="input-field ">
                             <input
                                     id="department"

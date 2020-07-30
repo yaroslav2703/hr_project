@@ -2,12 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const fs = require('fs');
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const upload = require('express-fileupload')
 const bodyParser = require('body-parser');
 const databaseMiddleware = require('../database/databaseInit')
 
-app.use(upload.any())
+app.use(upload())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
