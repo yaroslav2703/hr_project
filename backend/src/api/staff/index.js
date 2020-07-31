@@ -13,4 +13,6 @@ module.exports = (app) => {
     
     app.post('/staff/update', require('./staffUpdate'));
 
+    app.post('/staff/doc-download', require('./staffGetDoc'))
+
 };

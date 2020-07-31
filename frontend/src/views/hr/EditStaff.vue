@@ -150,6 +150,23 @@
                             <label class="active" for="probation">Испытательный срок</label>
                         </div>
 
+                        <span>Прикреплённые документы</span>
+
+                        <div v-for="doc in documents" :key="doc.systemName">
+                            <a style="cursor: pointer" @click="downloadDoc(doc.originalName, doc.systemName)">{{doc.originalName}}</a>
+                            <a :id=doc.systemName class="btn-flat" @click="deleteDoc(doc.systemName)">Удалить</a>
+                        </div>
+
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Выбрать документы</span>
+                                <input @change="documentPicked" type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Выберите документы для загрузки">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -197,7 +214,10 @@
             probation: '',
             photoView: '',
             oldPhoto: null,
-            image: null
+            image: null,
+            documents: [],
+            deleteDocuments: [],
+            newDocuments: []
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -216,7 +236,8 @@
                     clear: 'Удалить',
                     close: 'Закрыть',
                     firstDay: 1,
-                }
+                },
+                yearRange: [1960, new Date().getFullYear()]
             });
             var elemSelect = document.querySelectorAll('select');
             window.M.FormSelect.init(elemSelect);
@@ -255,6 +276,7 @@
                     this.subordination = this.employee.subordination
                     this.hireDate = this.employee.hireDate
                     this.probation = this.employee.probation
+                    this.documents = this.employee.documents
                 }
             } catch (e) {
                 console.log(e.message)
@@ -297,10 +319,24 @@
                 }
 
                 if (this.photo != null) {
-                    fData.append('photo', this.photo, 'image.png')
+                    fData.append('photo', this.photo)
                 } else {
-                    fData.append('photo', 'IMG')
+                    fData.append('photo', 'noImage')
                 }
+
+                if (this.deleteDocuments != []) {
+                    this.deleteDocuments.forEach(el => {
+                        fData.append('deleteDocuments', el)
+                    })
+                }
+
+                if(this.newDocuments != null) {
+                    this.newDocuments.forEach(el => {
+                        fData.append('documents', el)
+                    })
+                } else {
+                    fData.append('documents', 'DOC')
+                }  
 
                 try {
 
@@ -316,14 +352,6 @@
                         }
                     })
                     
-
-                    /*
-                    const response = await requests.request('/api/staff/update', 'PUT', formData);
-                    this.$message(response.message);
-                    if (response.message === 'Работник обновлен!') {
-                        await this.$router.push('/login?message=staff')
-                    }
-                    */
                 } catch (e) {
                     console.log(e.message)
                 }
@@ -342,6 +370,41 @@
                 fileReader.readAsDataURL(file[0])
                 this.image = file[0]
                 this.photo = this.image
+            },
+            async downloadDoc(docName, docId) {
+                const formData = new FormData()
+                formData.append('docId', docId)
+                let tempI = null
+                await axios.post('/api/staff/doc-download', formData).then(res => {
+                    tempI = res.data
+                }).catch(e => {
+                    console.log(e)
+                })
+                const linkSource = `data:application/*;base64,${tempI}`;
+                const downloadLink = document.createElement("a");
+
+                downloadLink.href = linkSource;
+                downloadLink.download = docName;
+                downloadLink.click();
+            },
+            deleteDoc(id) {
+                if (document.getElementById(id).innerText == 'УДАЛИТЬ') {
+                    this.deleteDocuments.push(id)
+                    document.getElementById(id).innerText = 'УДАЛЕНО'
+                    document.getElementById(id).className += ' orange-text'
+                } else {
+                    this.deleteDocuments.splice(this.deleteDocuments.indexOf(id), 1)
+                    document.getElementById(id).innerText = 'УДАЛИТЬ'
+                    document.getElementById(id).className = 'btn-flat'
+                }
+            },
+            documentPicked() {
+                const files = event.target.files
+                files.forEach(el => {
+                    let fReader = new FileReader()
+                    fReader.readAsDataURL(el)
+                })
+                this.newDocuments = files
             }
         }
     }

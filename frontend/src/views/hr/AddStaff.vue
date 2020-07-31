@@ -165,7 +165,7 @@
                                 <input @change="documentPicked" type="file" multiple>
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Выберите документы">
+                                <input class="file-path validate" type="text" placeholder="Выберите документы для загрузки">
                             </div>
                         </div>
 
@@ -235,7 +235,8 @@
                     clear: 'Удалить',
                     close: 'Закрыть',
                     firstDay: 1,
-                }
+                },
+                yearRange: [1960, new Date().getFullYear()]
             });
             var elemSelect = document.querySelectorAll('select');
             window.M.FormSelect.init(elemSelect);
@@ -278,14 +279,16 @@
                 if (this.photo != null) {
                     fData.append('photo', this.photo)
                 } else {
-                    fData.append('photo', 'IMG')
+                    fData.append('photo', 'noImage')
                 }
 
                 if(this.documents != null) {
-                    fData.append('documents', this.documents)
+                    this.documents.forEach(el => {
+                        fData.append('documents', el)
+                    })
                 } else {
                     fData.append('documents', 'DOC')
-                }                
+                }
                 
                 try {
                     await axios.post('/api/staff/add', fData, {
@@ -297,6 +300,8 @@
                         if (res.data.message === 'Работник добавлен') {
                             this.$router.push('/hr/staff')
                         }
+                    }).catch(e => {
+                        console.log(e)
                     })
                 } catch (e) {
                     console.log(e.message)
@@ -318,9 +323,11 @@
             },
             documentPicked() {
                 const files = event.target.files
-                const fReader = new FileReader()
-                fReader.readAsDataURL(files[0])
-                this.documents = files[0]
+                files.forEach(el => {
+                    let fReader = new FileReader()
+                    fReader.readAsDataURL(el)
+                })
+                this.documents = files
             }
         }
     }

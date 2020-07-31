@@ -18,7 +18,13 @@ const StaffSchema = new Schema(
         department: { type: String, required: false },
         subordination: { type: String, required: false },
         hireDate: { type: String, required: false },
-        probation: { type: String, required: false }
+        probation: { type: String, required: false },
+        documents: [
+            {
+                    originalName: { type: String, required: false},
+                    systemName: { type: String, required: false}
+            }
+        ]
     },
     { timestamps: true },
 )

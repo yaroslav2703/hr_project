@@ -61,7 +61,9 @@
         name: "Table",
         props: ['staff'],
         data: () => ({
-            tempId: null
+            tempId: null,
+            currentPage: 1,
+            totalPages: 10
         }),
         components: {
            StaffImg

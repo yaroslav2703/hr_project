@@ -4,11 +4,9 @@ const fs = require('fs')
 module.exports = async (req, res) => {
     try{
 
-        const {_id} = req.body;
+        const {docId} = req.body;
 
-        const employee = await Staff.findOne({_id});
-
-        img = await fs.readFile('uploads/' + employee.photo, (err, data) => {
+        await fs.readFile('uploads/' + docId, (err, data) => {
             if (err) {
                 console.log(err)
             }

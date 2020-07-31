@@ -22,6 +22,11 @@
                 <li class="collection-item"><b>Подчинение:</b><div>{{subordination}}</div></li>
                 <li class="collection-item"><b>Дата приёма на работу:</b> <div>{{hireDate}}</div></li>
                 <li class="collection-item"><b>Испытательный срок:</b> <div>{{probation}}</div></li>
+                <li class="collection-item"><b>Прикреплённые документы:</b> 
+                    <div v-for="doc in documents" :key="doc.systemName">
+                        <a style="cursor: pointer" @click="downloadDoc(doc.originalName, doc.systemName)">{{doc.originalName}}</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -52,7 +57,8 @@
             subordination: '',
             hireDate: '',
             probation: '',
-            img: null
+            img: null,
+            documents: []
         }),
         mounted() {
             if (messages[this.$route.query.message]) {
@@ -95,12 +101,30 @@
                     this.subordination = this.employee.subordination
                     this.hireDate = this.employee.hireDate
                     this.probation = this.employee.probation
+                    this.documents = this.employee.documents
                 }
             } catch (e) {
                 console.log(e.message)
             }
         },
+        methods: {
+            async downloadDoc(docName, docId) {
+                const formData = new FormData()
+                formData.append('docId', docId)
+                let tempI = null
+                await axios.post('/api/staff/doc-download', formData).then(res => {
+                    tempI = res.data
+                }).catch(e => {
+                    console.log(e)
+                })
+                const linkSource = `data:application/*;base64,${tempI}`;
+                const downloadLink = document.createElement("a");
 
+                downloadLink.href = linkSource;
+                downloadLink.download = docName;
+                downloadLink.click();
+            }
+        }
     }
 </script>
 

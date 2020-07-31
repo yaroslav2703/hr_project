@@ -14,6 +14,14 @@ module.exports = async (req, res) => {
             })
         }
 
+        if (candidate.documents != []) {
+            candidate.documents.forEach(el => {
+                fs.unlinkSync('uploads/' + el.systemName, (err) => {
+                    if (err) console.log(err)
+                })
+            })
+        }
+
         await Staff.deleteOne({_id});
 
         res.status(200).json({message: 'Сотрудник удален'})

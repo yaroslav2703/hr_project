@@ -3,7 +3,7 @@ const Vacancy = require('../../database/models/vacancy');
 module.exports = async (req, res) => {
     try{
         const {title, company, isHide, type} = req.body;
-        console.log(title, company, isHide, type)
+
         const find_obj = {};
         if (title != null) {
             find_obj['title'] = title
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
         if (type !== null) {
             find_obj['type'] = type
         }
-        console.log(find_obj)
+
         const vacancy = await Vacancy.find(find_obj);
 
         res.status(201).json({message: 'Список отфильтрован', vacancy: vacancy})
